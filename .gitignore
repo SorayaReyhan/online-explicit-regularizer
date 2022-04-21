@@ -1,0 +1,8 @@
+__pycache__
+img/
+old/
+.env
+*.code-workspace
+.vscode/
+data/
+output/
