@@ -63,7 +63,7 @@ def loss_plot(x, epochs, title):
     plt.xlabel("epoch")
     plt.title(title)
     plt.legend()
-    plt.show()
+    #plt.show()
 
     save_plt_img(OUTPUT_DIR, generate_filename(title))
 
@@ -76,7 +76,7 @@ def accuracy_plot(x, epochs, title):
     plt.xlabel("epoch")
     plt.title(title)
     plt.legend()
-    plt.show()
+    #plt.show()
 
     save_plt_img(OUTPUT_DIR, generate_filename(title))
 

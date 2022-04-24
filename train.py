@@ -37,7 +37,7 @@ class HParams(EWCTrainerHParams, MnistMLPHParams, OnlineExplicitTrainerHParams):
 parser = ArgumentParser()
 parser.add_argument("--model", choices=["vanilla", "mnist", "dummy"])
 parser.add_argument("--dataset", choices=["malware", "mnist", "dummy"])
-parser.add_argument("--trainer", choices=["sgd", "ewc", "online_explicit_ewc"])
+parser.add_argument("--trainer", choices=["sgd", "ewc", "online_explicit_ewc", "without_reg"])
 parser.add_argument("--epochs", type=int, default=HParams.epochs)
 parser.add_argument("--num_tasks", type=int, default=HParams.num_tasks)
 parser.add_argument("--num_classes", type=int, default=HParams.num_classes)
@@ -70,7 +70,7 @@ if hparams.dataset == "mnist":
     train_dataloaders, test_dataloaders = get_permute_mnist(hparams.num_tasks, hparams.batch_size)
 elif hparams.dataset == "malware":
     datasets_root = "data/random"  # set the malware datasets directory
-    train_dataloaders, test_dataloaders = get_malware_dataloaders(datasets_root, hparams.batch_size)
+    train_dataloaders, test_dataloaders = get_malware_dataloaders(datasets_root, hparams.num_tasks, hparams.batch_size)
 elif hparams.dataset == "dummy":
     input_shape = (28 * 28,) if hparams.model == "mnist" else (1, 64, 64)
     train_dataloaders, test_dataloaders = get_dummy_dataloaders(hparams.num_tasks, hparams.batch_size, input_shape)
@@ -96,6 +96,10 @@ if hparams.trainer == "sgd":
     loss, acc = standard_process(hparams, model, criterion, train_dataloaders, test_dataloaders, DEVICE)
     plot(hparams, loss, acc, name="sgd")
 
+elif hparams.trainer == "without_sgd":
+    loss, acc = standard_process(hparams, model, criterion, train_dataloaders, test_dataloaders, DEVICE)
+    plot(hparams, loss, acc, name="without_sgd")
+
 elif hparams.trainer == "ewc":
     ewc_trainer = EWCTrainer(hparams, model, criterion, train_dataloaders, test_dataloaders, DEVICE)
     loss_ewc, acc_ewc = ewc_trainer.run()
@@ -107,5 +111,5 @@ elif hparams.trainer == "online_explicit_ewc":
         hparams, model, criterion, regularizer, train_dataloaders, test_dataloaders, DEVICE
     )
     loss_explicit_ewc, acc_explicit_ewc = ewc_trainer.run()
-    plot(hparams, loss_explicit_ewc, acc_explicit_ewc, name="explicit ewc")
+    plot(hparams, loss_explicit_ewc, acc_explicit_ewc, name="online_explicit ewc")
 
