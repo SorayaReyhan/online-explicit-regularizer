@@ -6,7 +6,7 @@ from src.trainer.test import test_model
 from torch.optim import SGD
 
 
-def normal_train(
+def normal_train_new(
     net: nn.Module, criterion: nn.Module, dataloader: DataLoader, device: torch.device,
 ):
     net.train()
@@ -22,7 +22,7 @@ def normal_train(
     return epoch_loss / len(dataloader)
 
 
-def standard_process(hparams, net, criterion, train_dataloaders, test_dataloaders, device):
+def standard_process_new(hparams, net, criterion, train_dataloaders, test_dataloaders, device):
     net = net.to(device)
     #optimizer = SGD(params=net.parameters(), lr=hparams.lr)
 
@@ -39,7 +39,7 @@ def standard_process(hparams, net, criterion, train_dataloaders, test_dataloader
 
             trainloader = train_dataloaders[task]
             net.set_task(task)
-            train_loss = normal_train(net, criterion, trainloader, device)
+            train_loss = normal_train_new(net, criterion, trainloader, device)
             loss[task].append(train_loss)
 
             # test model on current and previous tasks
