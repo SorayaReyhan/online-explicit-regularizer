@@ -100,7 +100,7 @@ if hparams.trainer == "sgd":
     plot(hparams, loss, acc, name="sgd")
 
 elif hparams.trainer == "without_sgd":
-    loss, acc = standard_process(hparams, model, criterion, train_dataloaders, test_dataloaders, DEVICE)
+    loss, acc = standard_process_new(hparams, model, criterion, train_dataloaders, test_dataloaders, DEVICE)
     plot(hparams, loss, acc, name="without_sgd")
 
 elif hparams.trainer == "ewc":
