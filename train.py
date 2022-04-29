@@ -17,7 +17,7 @@ from src.regularizer.ewc import EWC
 from src.trainer.ewc import EWCTrainer, EWCTrainerHParams
 from src.trainer.online_explicit import OnlineExplicitTrainer, OnlineExplicitTrainerHParams
 from src.trainer.sgd import standard_process
-from src.trainer.withpot_sgd import standard_process_new
+from src.trainer.without_sgd import standard_process_new
 from src.utils import plot, seed_everything
 
 
