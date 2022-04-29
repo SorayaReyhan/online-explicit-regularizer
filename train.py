@@ -71,6 +71,9 @@ if hparams.dataset == "mnist":
 elif hparams.dataset == "malware":
     datasets_root = "data/random"  # set the malware datasets directory
     train_dataloaders, test_dataloaders = get_malware_dataloaders(datasets_root, hparams.num_tasks, hparams.batch_size)
+elif hparams.dataset == "cifar100":
+    datasets_root = "data/random"  # set the malware datasets directory
+    train_dataloaders, test_dataloaders = get_malware_dataloaders(datasets_root, hparams.num_tasks, hparams.batch_size)    
 elif hparams.dataset == "dummy":
     input_shape = (28 * 28,) if hparams.model == "mnist" else (1, 64, 64)
     train_dataloaders, test_dataloaders = get_dummy_dataloaders(hparams.num_tasks, hparams.batch_size, input_shape)
