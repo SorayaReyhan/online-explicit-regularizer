@@ -36,7 +36,7 @@ class HParams(EWCTrainerHParams, MnistMLPHParams, OnlineExplicitTrainerHParams):
 
 parser = ArgumentParser()
 parser.add_argument("--model", choices=["vanilla", "mnist", "dummy"])
-parser.add_argument("--dataset", choices=["malware", "mnist", "dummy"])
+parser.add_argument("--dataset", choices=["malware", "mnist", "dummy", "cifar100"])
 parser.add_argument("--trainer", choices=["sgd", "ewc", "online_explicit_ewc", "without_sgd"])
 parser.add_argument("--epochs", type=int, default=HParams.epochs)
 parser.add_argument("--num_tasks", type=int, default=HParams.num_tasks)
