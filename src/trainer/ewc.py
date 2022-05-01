@@ -3,13 +3,14 @@ from typing import List
 
 import torch
 from torch import nn
+from torch.optim import SGD
+from torch.utils.data import DataLoader
+from tqdm import tqdm
+
 from src.model.multihead_classifier_base import MultiHeadClassifierBase
 from src.regularizer.ewc import EWC, EWCHparams
 from src.trainer.sgd import normal_train
 from src.trainer.test import test_model
-from torch.optim import SGD
-from torch.utils.data import DataLoader
-from tqdm import tqdm
 
 
 @dataclass
@@ -17,7 +18,6 @@ class EWCTrainerHParams(EWCHparams):
     epochs: int = 50
     lr: float = 1e-3
     batch_size: int = 128
-    sample_size: int = 200
     num_tasks: int = 3
     importance: float = 1000
 
@@ -35,6 +35,7 @@ class EWCTrainer:
         test_dataloaders: List[DataLoader],
         device=torch.device,
     ) -> None:
+
         self.hparams = hparams
         self.net = net.to(device)
         self.train_dataloaders = train_dataloaders
@@ -94,7 +95,6 @@ class EWCTrainer:
     def ewc_train(self, task: int, loss, acc):
         """Train model on a task with EWC"""
 
-        sample_size = self.hparams.sample_size
         epochs = self.hparams.epochs
 
         train_dataloaders = self.train_dataloaders
@@ -104,18 +104,8 @@ class EWCTrainer:
         # current task trainloader
         trainloader = train_dataloaders[task]
 
-        # # get a sample from past task examples for EWC estimation
-        # old_tasks = []
-        # for sub_task in range(task):
-        #     subtask_sample = train_dataloaders[sub_task].dataset.get_sample(sample_size)
-        #     old_tasks = old_tasks + subtask_sample
-        # old_tasks = random.sample(old_tasks, k=sample_size)
-
         # train on the current task for n epochs
         for _ in tqdm(range(epochs)):
-            # TODO: should't EWC be computed only once for all epochs?
-            # but here it's using fresh EWC at each epoch, which is perhaps unfair
-            # ewc = EWC(model, old_tasks)
 
             net.set_task(task)
             train_loss = self.ewc_train_epoch(trainloader)

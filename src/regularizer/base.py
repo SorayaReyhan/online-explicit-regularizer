@@ -1,12 +1,13 @@
 from copy import deepcopy
 from typing import Dict
+
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
 
 
 class RegularizerHParams:
-    n_batches_for_importance_estimation = 30
+    n_batches_for_importance_estimation = -1
     saliency_momentum = 0.8
 
 

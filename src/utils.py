@@ -2,19 +2,12 @@ import json
 import os
 import random
 from datetime import datetime
-from PIL import UnidentifiedImageError
 
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
 
 plt.style.use("seaborn-white")
-
-OUTPUT_DIR = "output"
-
-
-if not os.path.exists(OUTPUT_DIR):
-    os.mkdir(OUTPUT_DIR)
 
 
 def seed_everything(seed):
@@ -40,85 +33,90 @@ def generate_filename(title):
     return f"{generate_timestr()}_{title}.png"
 
 
-def save_plt_img(dir, filename, **plt_kwargs):
-
-    fullpath = os.path.join(dir, filename)
-    plt.savefig(fullpath, **plt_kwargs)
-
-    print(f'Saved image "{fullpath}"')
-
-
-def write_json(dir, values, name):
-    path = os.path.join(dir, f"{generate_timestr()}_{replace_punct(name)}.json")
-    with open(path, "w") as f:
-        json.dump(
-            values, f, indent=2,
+class Logger:
+    def __init__(self, hparams) -> None:
+        self.hparams = hparams
+        self.output = os.path.join(
+            "output", f"{hparams.dataset}_{hparams.num_classes}classes_{hparams.num_tasks}tasks_{hparams.name}"
         )
-    print(f'Wrote values at "{path}"')
 
+        if not os.path.exists(self.output):
+            os.makedirs(self.output, exist_ok=True)
 
-def loss_plot(x, epochs, title):
-    for t, v in x.items():
-        plt.plot(list(range(t * epochs, (t + 1) * epochs)), v, label=f"task-{t}")
-    plt.xlabel("epoch")
-    plt.title(title)
-    plt.legend()
-    #plt.show()
+    def save_plt_img(self, filename, **plt_kwargs):
 
-    save_plt_img(OUTPUT_DIR, generate_filename(title))
+        fullpath = os.path.join(self.output, filename)
+        plt.savefig(fullpath, **plt_kwargs)
 
+        print(f'Saved image "{fullpath}"')
 
-def accuracy_plot(x, epochs, title):
-    for t, v in x.items():
-        xticks = [i + t * epochs for i in range(len(v))]
-        plt.plot(xticks, v, label=f"task-{t}")
-    plt.ylim(-0.1, 1.1)
-    plt.xlabel("epoch")
-    plt.title(title)
-    plt.legend()
-    #plt.show()
+    def write_json(self, values, name):
+        path = os.path.join(self.output, f"{generate_timestr()}_{replace_punct(name)}.json")
+        with open(path, "w") as f:
+            json.dump(
+                values, f, indent=2,
+            )
+        print(f'Wrote values at "{path}"')
 
-    save_plt_img(OUTPUT_DIR, generate_filename(title))
+    def loss_plot(self, x, title):
+        epochs = self.hparams.epochs
+        for t, v in x.items():
+            plt.plot(list(range(t * epochs, (t + 1) * epochs)), v, label=f"task-{t}")
+        plt.xlabel("epoch")
+        plt.title(title)
+        plt.legend()
 
+        self.save_plt_img(generate_filename(title))
+        plt.show()
 
-def plot(hparams, loss, acc, name):
+    def accuracy_plot(self, x, title):
+        epochs = self.hparams.epochs
+        for t, v in x.items():
+            xticks = [i + t * epochs for i in range(len(v))]
+            plt.plot(xticks, v, label=f"task-{t}")
+        plt.ylim(-0.1, 1.1)
+        plt.xlabel("epoch")
+        plt.title(title)
+        plt.legend()
 
-    plt.figure()
-    loss_plot(loss, hparams.epochs, f"Losses ({name})")
+        self.save_plt_img(generate_filename(title))
+        plt.show()
 
-    plt.figure()
-    accuracy_plot(acc, hparams.epochs, f"Accuracies ({name})")
+    def log_experiment_results(self, loss, acc, name):
+        hparams = self.hparams
 
-    # calculate average accuracy
-    avg_acc_task = [0] * hparams.num_tasks
-    for task in range(hparams.num_tasks):
-        # last accuracy for task
-        avg_acc_task[task] = sum(acc[task]) / len(acc[task])
+        plt.figure()
+        self.loss_plot(loss, f"Losses ({name})")
 
-    # calculate last accuracy
-    final_acc_task = [0] * hparams.num_tasks
-    for task in range(hparams.num_tasks):
-        # last accuracy for task
-        final_acc_task[task] = acc[task][-1]
+        plt.figure()
+        self.accuracy_plot(acc, f"Accuracies ({name})")
 
-    # calculate average forgetting
-    avg_forgetting = [0] * hparams.num_tasks
-    for task in range(hparams.num_tasks):
-        # last accuracy for task
-        max_acc = max(acc[task])
-        last_acc = acc[task][-1]
-        avg_forgetting[task] = max_acc - last_acc
+        # calculate average accuracy
+        avg_acc_task = [0] * hparams.num_tasks
+        for task in range(hparams.num_tasks):
+            avg_acc_task[task] = sum(acc[task]) / len(acc[task])
 
-    # write loss, acc
-    write_json(
-        OUTPUT_DIR,
-        {
-            "avg_forgetting": avg_forgetting,
-            "avg_acc_task": avg_acc_task,
-            "final_acc_task": final_acc_task,
-            "hparams": vars(hparams),
-            "loss": loss,
-            "acc": acc,
-        },
-        name,
-    )
+        # calculate last accuracy
+        final_acc_task = [0] * hparams.num_tasks
+        for task in range(hparams.num_tasks):
+            final_acc_task[task] = acc[task][-1]
+
+        # calculate average forgetting
+        avg_forgetting = [0] * hparams.num_tasks
+        for task in range(hparams.num_tasks - 1):
+            max_acc = max(acc[task])
+            last_acc = acc[task][-1]
+            avg_forgetting[task] = max_acc - last_acc
+
+        # write loss, acc
+        self.write_json(
+            {
+                "avg_forgetting": avg_forgetting,
+                "avg_acc_task": avg_acc_task,
+                "final_acc_task": final_acc_task,
+                "hparams": self.hparams.__dict__,
+                "loss": loss,
+                "acc": acc,
+            },
+            name,
+        )

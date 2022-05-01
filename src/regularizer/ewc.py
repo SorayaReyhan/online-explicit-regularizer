@@ -1,13 +1,14 @@
 from typing import Dict
 
 import torch
-from torch.utils.data import DataLoader
 from torch import nn
+from torch.utils.data import DataLoader
+
 from src.regularizer.base import Regularizer, RegularizerHParams
 
 
 class EWCHparams(RegularizerHParams):
-    sample_size: int = 200
+    pass
 
 
 class EWC(Regularizer):
@@ -47,9 +48,8 @@ class EWC(Regularizer):
             for name in self.importance:
                 prev_imp = self.importance[name]
 
-                # TODO: averaging is not the only option to mix the importances.
-                # Averaging assumes that the importance of current task is equal to the importance of previous tasks combined.
-                self.importance[name] = (curr_imp[name] + prev_imp) / 2
+                # parameter importance values are accumulated for each task
+                self.importance[name] = curr_imp[name] + prev_imp
 
             # TODO: look at normalize_saliency argument here https://github.com/EkdeepSLubana/QRforgetting/blob/00ff0228142d685f1f4a0f463c4723baf89cbb01/reg_based.py#L176
             # do we need this option?

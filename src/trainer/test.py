@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
 from torch.nn import functional as F
+from torch.utils.data import DataLoader
 
 
 @torch.no_grad()

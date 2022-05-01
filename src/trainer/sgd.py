@@ -1,9 +1,10 @@
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
 import tqdm
-from src.trainer.test import test_model
 from torch.optim import SGD
+from torch.utils.data import DataLoader
+
+from src.trainer.test import test_model
 
 
 def normal_train(

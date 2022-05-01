@@ -1,7 +1,8 @@
 import random
+
 import torch
-from torch.utils.data import DataLoader
 import torchvision.datasets as datasets
+from torch.utils.data import DataLoader
 
 
 class PermutedMNIST(datasets.MNIST):

@@ -13,6 +13,9 @@ class MnistMLPHParams:
 class MnistMLP(MultiHeadClassifierBase):
     def __init__(self, hparams: MnistMLPHParams):
         super(MnistMLP, self).__init__()
+
+        self.drop = nn.Dropout(hparams.dropout)
+
         hidden_size = hparams.hidden_size
         self.fc1 = nn.Linear(28 * 28, hidden_size)
         self.fc2 = nn.Linear(hidden_size, hidden_size)
@@ -20,16 +23,18 @@ class MnistMLP(MultiHeadClassifierBase):
 
         self.heads = nn.ModuleList([nn.Linear(hidden_size, hparams.num_classes) for _ in range(hparams.num_tasks)])
 
-    def set_task(self, task):
-        self.task = task
-
     def forward(self, input, task=None):
         if task is None:
             task = self.task
 
         x = F.relu(self.fc1(input))
+        x = self.drop(x)
+
         x = F.relu(self.fc2(x))
+        x = self.drop(x)
+
         x = F.relu(self.fc3(x))
+        x = self.drop(x)
 
         head = self.heads[task]
         x = head(x)

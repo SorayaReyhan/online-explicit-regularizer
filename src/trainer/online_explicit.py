@@ -3,14 +3,15 @@ from typing import Dict, List
 
 import numpy as np
 import torch
-from src.model.multihead_classifier_base import MultiHeadClassifierBase
-from src.regularizer.base import Regularizer
-from src.trainer.test import test_model
-from src.trainer.utils import normalize
 from torch import nn
 from torch.optim import SGD
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+
+from src.model.multihead_classifier_base import MultiHeadClassifierBase
+from src.regularizer.base import Regularizer
+from src.trainer.test import test_model
+from src.trainer.utils import normalize
 
 
 class OnlineExplicitTrainerHParams:
@@ -18,7 +19,6 @@ class OnlineExplicitTrainerHParams:
     epochs = 50
     num_tasks = 3
     use_AGC = False
-    n_batches_for_importance_estimation = 30
 
 
 def AGC(net: nn.Module, optimizer):
