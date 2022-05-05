@@ -126,9 +126,8 @@ elif hparams.trainer == "online_explicit_ewc":
     for child in model.children():
         cntr+=1
         if cntr < 2:
-        print(child)
-        for param in child.parameters():
-            param.requires_grad = False
+            for param in child.parameters():
+                param.requires_grad = False
     regularizer = EWC(hparams, model, criterion, DEVICE)
     ewc_trainer = OnlineExplicitTrainer(
         hparams, model, criterion, regularizer, train_dataloaders, test_dataloaders, DEVICE
