@@ -96,7 +96,7 @@ class OnlineExplicitTrainer:
         net.train()
         epoch_loss = 0
         # freezing the first layer
-        if task = 1:
+        if task == 1:
             cntr=0
             for child in model.children():
                 cntr+=1
