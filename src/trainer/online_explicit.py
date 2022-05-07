@@ -95,20 +95,7 @@ class OnlineExplicitTrainer:
         net.set_task(task)
         net.train()
         epoch_loss = 0
-        # freezing the first layer
-        if task == 1:
-            cntr=0
-            for child in model.children():
-                cntr+=1
-                if cntr < 3:
-                    for param in child.parameters():
-                        param.requires_grad = False
-        layer_counter = 0
-        for name, child in model.named_children():
-            if name == 'features':
-                for layer in module.children():
-                    print('Layer "{}" in module "{}" was frozen!'.format(layer_counter, name))
-                layer_counter+=1
+
         # i = 0...#iter / epoch
         # #iter = size(dataset) / batch_size * epoch
         for inputs, targets in dataloader:  #  loop size(dataset) / batchsize times
@@ -178,7 +165,17 @@ class OnlineExplicitTrainer:
         for task in range(self.hparams.num_tasks):
             loss[task] = []
             acc[task] = []
+            if task==1 : 
+                # freezing the first layer
+                cntr=0
+                for child in model.children():
+                    cntr+=1
+                    if cntr < 3:
+                        for param in child.parameters():
+                            param.requires_grad = False
+                self.explicit_train(task, loss, acc)
+            else
 
-            self.explicit_train(task, loss, acc)
+                self.explicit_train(task, loss, acc)
 
         return loss, acc
