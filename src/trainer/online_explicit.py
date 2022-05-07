@@ -166,24 +166,18 @@ class OnlineExplicitTrainer:
             loss[task] = []
             acc[task] = []
             if task==1 : 
-                # freezing the first layer
-                print(net.conv1.weight)
+                # freezing the first layer after the traing and testing of the first task 
+                print(net.conv2.weight)
                 cntr=0
                 for child in net.children():
                     cntr+=1
                     if cntr < 2:
                         for param in child.parameters():
                             param.requires_grad = False
-                
-                #layer_counter = 0
-                #for name, child in net.named_children():
-                    #print(child)
-                    #print(param.grad)
-                    #layer_counter+=1
 
                 self.explicit_train(task, loss, acc)
             else:
-                print(net.conv1.weight)
+                print(net.conv2.weight)
                 self.explicit_train(task, loss, acc)
                 print(net.conv1.weight)
 
