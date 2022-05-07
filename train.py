@@ -121,7 +121,7 @@ elif hparams.trainer == "ewc":
     logger.log_experiment_results(loss_ewc, acc_ewc, name="ewc")
 
 elif hparams.trainer == "online_explicit_ewc":
-    model = model()
+    #model = model()
     cntr=0
     for child in model.children():
         cntr+=1
