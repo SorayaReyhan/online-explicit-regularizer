@@ -175,10 +175,10 @@ class OnlineExplicitTrainer:
                             param.requires_grad = False
 
                 self.explicit_train(task, loss, acc)
-                print(net.conv2.weight)
+                print(net.conv1.weight)
             else:
                 #print(net.conv2.weight)
                 self.explicit_train(task, loss, acc)
-                print(net.conv2.weight)
+                print(net.conv1.weight)
 
         return loss, acc
