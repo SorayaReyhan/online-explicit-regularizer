@@ -174,8 +174,7 @@ class OnlineExplicitTrainer:
                         for param in child.parameters():
                             param.requires_grad = False
                 self.explicit_train(task, loss, acc)
-            else
-
+            else:
                 self.explicit_train(task, loss, acc)
 
         return loss, acc
