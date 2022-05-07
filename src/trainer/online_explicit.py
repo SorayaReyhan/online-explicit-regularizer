@@ -175,15 +175,16 @@ class OnlineExplicitTrainer:
                         for param in child.parameters():
                             param.requires_grad = False
                 
-                layer_counter = 0
-                for name, child in net.named_children():
-                    print(child)
-                    print(param.grad)
-                    layer_counter+=1
+                #layer_counter = 0
+                #for name, child in net.named_children():
+                    #print(child)
+                    #print(param.grad)
+                    #layer_counter+=1
 
                 self.explicit_train(task, loss, acc)
             else:
                 print(net.conv2.weight)
                 self.explicit_train(task, loss, acc)
+                print(net.conv2.weight)
 
         return loss, acc
