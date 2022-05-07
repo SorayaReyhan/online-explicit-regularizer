@@ -167,7 +167,7 @@ class OnlineExplicitTrainer:
             acc[task] = []
             if task==1 : 
                 # freezing the first layer
-                print(net.Conv2d.weight)
+                print(net.conv1.weight)
                 cntr=0
                 for child in net.children():
                     cntr+=1
@@ -183,7 +183,7 @@ class OnlineExplicitTrainer:
 
                 self.explicit_train(task, loss, acc)
             else:
-                print(net.Conv2d.weight)
+                print(net.conv1.weight)
                 self.explicit_train(task, loss, acc)
 
         return loss, acc
