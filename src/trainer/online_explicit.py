@@ -177,7 +177,7 @@ class OnlineExplicitTrainer:
 
                 self.explicit_train(task, loss, acc)
             else:
-                print(net.conv2.weight)
+                #print(net.conv2.weight)
                 self.explicit_train(task, loss, acc)
                 print(net.conv1.weight)
 
