@@ -122,8 +122,9 @@ elif hparams.trainer == "ewc":
 
 elif hparams.trainer == "online_explicit_ewc":
     model = model()
+    self.features=model.features
     cntr=0
-    for child in model.children():
+    for child in self.children():
         cntr+=1
         if cntr < 2:
             for param in child.parameters():
