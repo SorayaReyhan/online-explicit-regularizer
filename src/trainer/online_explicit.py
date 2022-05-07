@@ -171,7 +171,7 @@ class OnlineExplicitTrainer:
                 cntr=0
                 for child in net.children():
                     cntr+=1
-                    if cntr < 3:
+                    if cntr < 2:
                         for param in child.parameters():
                             param.requires_grad = False
                 
