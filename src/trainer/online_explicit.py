@@ -173,6 +173,14 @@ class OnlineExplicitTrainer:
                     if cntr < 3:
                         for param in child.parameters():
                             param.requires_grad = False
+                
+                layer_counter = 0
+                for name, child in model.named_children():
+                    if name == 'features':
+                        for layer in module.children():
+                    print('Layer "{}" in module "{}" was frozen!'.format(layer_counter, name))
+                    layer_counter+=1
+                    
                 self.explicit_train(task, loss, acc)
             else:
                 self.explicit_train(task, loss, acc)
