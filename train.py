@@ -31,7 +31,7 @@ class HParams(EWCTrainerHParams, MnistMLPHParams, OnlineExplicitTrainerHParams):
     num_tasks: int = 4
     num_classes: int = 5
     seed: int = 12345
-    model: str = "vanilla"
+    model: str = "vanilla_cnn"
     dataset: str = "malware"
     trainer: str = "sgd"
     saliency_momentum: float = 0.8
@@ -121,14 +121,20 @@ elif hparams.trainer == "ewc":
     logger.log_experiment_results(loss_ewc, acc_ewc, name="ewc")
 
 elif hparams.trainer == "online_explicit_ewc":
-    #model = model()
+    # freezing the first convolutional layer
     cntr=0
     for child in model.children():
         cntr+=1
-        if cntr < 2:
+        if cntr < 3:
             for param in child.parameters():
                 param.requires_grad = False
-    
+    # freezing the first two convolutional layers
+    #cntr=0
+    #for child in model.children():
+    #    cntr+=1
+    #   if cntr < 2:
+    #        for param in child.parameters():
+    #           param.requires_grad = False
     regularizer = EWC(hparams, model, criterion, DEVICE)
     ewc_trainer = OnlineExplicitTrainer(
         hparams, model, criterion, regularizer, train_dataloaders, test_dataloaders, DEVICE
