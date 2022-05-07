@@ -121,13 +121,13 @@ elif hparams.trainer == "ewc":
     logger.log_experiment_results(loss_ewc, acc_ewc, name="ewc")
 
 elif hparams.trainer == "online_explicit_ewc":
-    #model = model()
-    #cntr=0
-    #for child in model.children():
-        #cntr+=1
-        #if cntr < 2:
-            #for param in child.parameters():
-                #param.requires_grad = False
+    model = model()
+    cntr=0
+    for child in model.children():
+        cntr+=1
+        if cntr < 2:
+            for param in child.parameters():
+                param.requires_grad = False
     regularizer = EWC(hparams, model, criterion, DEVICE)
     ewc_trainer = OnlineExplicitTrainer(
         hparams, model, criterion, regularizer, train_dataloaders, test_dataloaders, DEVICE
