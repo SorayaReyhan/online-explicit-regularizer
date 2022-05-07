@@ -161,21 +161,21 @@ class OnlineExplicitTrainer:
         """
 
         loss, acc = {}, {}
-
+        net = self.net
         for task in range(self.hparams.num_tasks):
             loss[task] = []
             acc[task] = []
             if task==1 : 
                 # freezing the first layer
                 cntr=0
-                for child in model.children():
+                for child in net.children():
                     cntr+=1
                     if cntr < 3:
                         for param in child.parameters():
                             param.requires_grad = False
                 
                 layer_counter = 0
-                for name, child in model.named_children():
+                for name, child in net.named_children():
                     if name == 'features':
                         for layer in module.children():
                             print('Layer "{}" in module "{}" was frozen!'.format(layer_counter, name))
