@@ -180,8 +180,8 @@ class OnlineExplicitTrainer:
                        #for param in child.parameters():
                             #param.requires_grad = False
                        #index+=1
-                #self.explicit_train(task, loss, acc)
-                #print(net.conv1.weight)
+                self.explicit_train(task, loss, acc)
+                print(net.conv1.weight)
             else:
                 self.explicit_train(task, loss, acc)
                 print(net.conv1.weight)
