@@ -167,21 +167,20 @@ class OnlineExplicitTrainer:
             acc[task] = []
             if task==1 : 
                 # freezing the first layer after the traing and testing of the first task
-                #cntr=0
-                #for child in net.children():
-                    #cntr+=1
-                    #if cntr < 4:
-                        #for param in child.parameters():
-                            #param.requires_grad = False
-                    
-                #self.explicit_train(task, loss, acc)
-                index = 0
+                cntr=0
                 for child in net.modules():
-                    if (isinstance(child, nn.Conv2d)):
-                    #if (int(survival[index]) == 0):
+                    cntr+=1
+                    if cntr < 4:
                         for param in child.parameters():
                             param.requires_grad = False
-                        index+=1
+                    
+                #self.explicit_train(task, loss, acc)
+                #index = 0
+                #for child in net.modules():
+                    #if (isinstance(child, nn.Conv2d)):
+                       # for param in child.parameters():
+                            #param.requires_grad = False
+                        #index+=1
                 print(net.conv2.weight)
             else:
                 self.explicit_train(task, loss, acc)
