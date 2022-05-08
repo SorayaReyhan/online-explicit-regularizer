@@ -173,7 +173,7 @@ class OnlineExplicitTrainer:
                         print(child)
                         for param in child.parameters():
                             param.requires_grad = False
-                            print(param.requires_grad)
+                        print(param.requires_grad)
                         index+=1
 
                 # freezing the first two convolutional layers after the traing and testing of the first task    
@@ -186,9 +186,9 @@ class OnlineExplicitTrainer:
                        #index+=1
 
                 self.explicit_train(task, loss, acc)
-                print(net.conv2.weight)
+                print(net.conv1.weight)
             else:
                 self.explicit_train(task, loss, acc)
-                print(net.conv2.weight)
+                print(net.conv1.weight)
 
         return loss, acc
