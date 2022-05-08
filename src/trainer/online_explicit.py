@@ -177,11 +177,11 @@ class OnlineExplicitTrainer:
                 #self.explicit_train(task, loss, acc)
                 index = 0
                 for child in net.modules():
-                if (isinstance(child, nn.Conv2d)):
+                    if (isinstance(child, nn.Conv2d)):
                     #if (int(survival[index]) == 0):
-                    for param in child.parameters():
-                        param.requires_grad = False
-                    index+=1
+                        for param in child.parameters():
+                            param.requires_grad = False
+                        index+=1
                 print(net.conv2.weight)
             else:
                 self.explicit_train(task, loss, acc)
