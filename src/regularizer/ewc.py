@@ -87,5 +87,5 @@ class EWC(Regularizer):
         for name, param in model.named_parameters():
             if param.requires_grad==True:
                 _loss = self.importance[name] * (param - self.params[name]) ** 2
-            loss += _loss.sum()
+                loss += _loss.sum()
         return loss
