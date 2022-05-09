@@ -49,7 +49,8 @@ class EWC(Regularizer):
                 prev_imp = self.importance[name]
 
                 # parameter importance values are accumulated for each task
-                self.importance[name] = curr_imp[name] + prev_imp
+                #self.importance[name] = curr_imp[name] + prev_imp
+                self.importance[name] = curr_imp.get(name, 0) + prev_imp
 
             # TODO: look at normalize_saliency argument here https://github.com/EkdeepSLubana/QRforgetting/blob/00ff0228142d685f1f4a0f463c4723baf89cbb01/reg_based.py#L176
             # do we need this option?
