@@ -132,6 +132,7 @@ class EWCTrainer:
         for task in range(self.hparams.num_tasks):
             loss[task] = []
             acc[task] = []
+            net = self.net
 
             # if the first task, then do the standard sgd training
             if task == 0:
@@ -139,7 +140,7 @@ class EWCTrainer:
 
             # for other tasks train with ewc regularization
             else:
-                net = self.net
+                #net = self.net
                 if task==1 : 
                     # freezing the first convolutional layer after the traing and testing of the first task
                     #index = 0
