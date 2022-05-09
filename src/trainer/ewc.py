@@ -161,10 +161,10 @@ class EWCTrainer:
                             #index+=1
 
                     self.ewc_train(task, loss, acc)
-                    print(net.conv2.weight)
+                    print(net.conv1.weight)
                 else:
                     self.ewc_train(task, loss, acc)
-                    print(net.conv2.weight)
+                    print(net.conv1.weight)
                 #self.ewc_train(task, loss, acc)
 
         return loss, acc
