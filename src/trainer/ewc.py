@@ -141,7 +141,7 @@ class EWCTrainer:
             else:
                 net = self.net
                 if task==1 : 
-                # freezing the first convolutional layer after the traing and testing of the first task
+                    # freezing the first convolutional layer after the traing and testing of the first task
                     index = 0
                     for name, child in net.named_children():
                         if (isinstance(child, nn.Conv2d) and name=='conv1'):
@@ -151,7 +151,7 @@ class EWCTrainer:
                             print(param.requires_grad)
                             index+=1
 
-                # freezing the first two convolutional layers after the traing and testing of the first task
+                    # freezing the first two convolutional layers after the traing and testing of the first task
                     #index = 0
                     #for child in net.modules():
                         #if (isinstance(child, nn.Conv2d)):
@@ -160,11 +160,11 @@ class EWCTrainer:
                             #print(param.requires_grad)
                             #index+=1
 
-                self.ewc_train(task, loss, acc)
-                print(net.conv2.weight)
-            else:
-                self.ewc_train(task, loss, acc)
-                print(net.conv2.weight)
+                    self.ewc_train(task, loss, acc)
+                    print(net.conv2.weight)
+                else:
+                    self.ewc_train(task, loss, acc)
+                    print(net.conv2.weight)
                 #self.ewc_train(task, loss, acc)
 
         return loss, acc
