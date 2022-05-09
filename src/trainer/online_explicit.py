@@ -177,7 +177,7 @@ class OnlineExplicitTrainer:
                         index+=1
 
                 # freezing the first two convolutional layers after the traing and testing of the first task
-                index=0
+                index = 0
                 for child in net.modules():
                     if (isinstance(child, nn.Conv2d)):
                        for param in child.parameters():
