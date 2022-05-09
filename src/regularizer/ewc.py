@@ -85,7 +85,7 @@ class EWC(Regularizer):
     def penalty(self, model: nn.Module):
         loss = 0
         for name, param in model.named_parameters():
-            if requires_grad==True:
+            if param.requires_grad==True:
                 _loss = self.importance[name] * (param - self.params[name]) ** 2
             loss += _loss.sum()
         return loss
