@@ -156,6 +156,7 @@ class EWCTrainer:
                     index = 0
                     for child in net.modules():
                         if (isinstance(child, nn.Conv2d)):
+                            print(child)
                             for param in child.parameters():
                                 param.requires_grad = False
                             print(param.requires_grad)
