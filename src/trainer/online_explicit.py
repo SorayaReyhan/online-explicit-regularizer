@@ -182,7 +182,7 @@ class OnlineExplicitTrainer:
                     if (isinstance(child, nn.Conv2d)):
                        for param in child.parameters():
                             param.requires_grad = False
-                        print(param.requires_grad)
+                       print(param.requires_grad)
                        index+=1
 
                 self.explicit_train(task, loss, acc)
