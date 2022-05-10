@@ -174,6 +174,7 @@ class OnlineExplicitTrainer:
                         for param in child.parameters():
                             param.requires_grad = False
                         print(param.requires_grad)
+                        
                         index+=1
 
                 # freezing the first two convolutional layers after the traing and testing of the first task
