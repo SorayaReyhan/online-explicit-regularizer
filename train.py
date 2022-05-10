@@ -116,25 +116,13 @@ if hparams.trainer == "sgd":
     logger.log_experiment_results(loss, acc, name="sgd")
 
 elif hparams.trainer == "ewc":
+
     ewc_trainer = EWCTrainer(hparams, model, criterion, train_dataloaders, test_dataloaders, DEVICE)
     loss_ewc, acc_ewc = ewc_trainer.run()
     logger.log_experiment_results(loss_ewc, acc_ewc, name="ewc")
 
 elif hparams.trainer == "online_explicit_ewc":
-    # freezing the first convolutional layer
-    cntr=0
-    for child in model.children():
-        cntr+=1
-        if cntr < 3:
-            for param in child.parameters():
-                param.requires_grad = False
-    # freezing the first two convolutional layers
-    #cntr=0
-    #for child in model.children():
-    #    cntr+=1
-    #   if cntr < 2:
-    #        for param in child.parameters():
-    #           param.requires_grad = False
+
     regularizer = EWC(hparams, model, criterion, DEVICE)
     ewc_trainer = OnlineExplicitTrainer(
         hparams, model, criterion, regularizer, train_dataloaders, test_dataloaders, DEVICE
