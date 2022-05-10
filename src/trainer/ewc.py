@@ -117,7 +117,7 @@ class EWCTrainer:
                 net.set_task(sub_task)
                 test_acc = test_model(net, testloader, self.device)
                 acc[sub_task].append(test_acc)
-
+        
         # update parameter importance
         self.ewc.task_end(trainloader)
 
@@ -133,40 +133,36 @@ class EWCTrainer:
             loss[task] = []
             acc[task] = []
             net = self.net
-
             # if the first task, then do the standard sgd training
             if task == 0:
                 self.sgd_train(task, loss, acc)
-
             # for other tasks train with ewc regularization
             else:
-                #net = self.net
                 if task==1 : 
                     # freezing the first convolutional layer after the traing and testing of the first task
-                    #index = 0
-                    #for name, child in net.named_children():
-                        #if (isinstance(child, nn.Conv2d) and name=='conv1'):
-                            #print(child)
-                            #for param in child.parameters():
-                                #param.requires_grad = False
-                            #print(param.requires_grad)
-                            #index+=1
-
-                    # freezing the first two convolutional layers after the traing and testing of the first task
                     index = 0
-                    for child in net.modules():
-                        if (isinstance(child, nn.Conv2d)):
+                    for name, child in net.named_children():
+                        if (isinstance(child, nn.Conv2d) and name=='conv1'):
                             print(child)
                             for param in child.parameters():
                                 param.requires_grad = False
                             print(param.requires_grad)
                             index+=1
-
+                    # freezing the first two convolutional layers after the traing and testing of the first task
+                    #index = 0
+                    #for child in net.modules():
+                        #if (isinstance(child, nn.Conv2d)):
+                            #print(child)
+                            #for param in child.parameters():
+                                #param.requires_grad = False
+                            #print(param.requires_grad)
+                            #index+=1
                     self.ewc_train(task, loss, acc)
                     print(net.conv2.weight)
                 else:
+                    
+                    
                     self.ewc_train(task, loss, acc)
                     print(net.conv2.weight)
                 #self.ewc_train(task, loss, acc)
-
         return loss, acc
