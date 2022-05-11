@@ -43,28 +43,6 @@ def standard_process(hparams, net, criterion, train_dataloaders, test_dataloader
                     #print(param.requires_grad)
                     #index+=1
 
-            
-                
-            
-        
-        else:
-            # train model on the current task for n epochs
-            for _ in tqdm.tqdm(range(hparams.epochs)):
-
-                trainloader = train_dataloaders[task]
-                net.set_task(task)
-                train_loss = normal_train(net, optimizer, criterion, trainloader, device)
-                loss[task].append(train_loss)
-
-            # test model on current and previous tasks
-            for sub_task in range(task + 1):
-                testloader = test_dataloaders[sub_task]
-                net.set_task(sub_task)
-                test_acc = test_model(net, testloader, device)
-                acc[sub_task].append(test_acc)
-            
-            print(net.conv1.weight)
-
         # train model on the current task for n epochs
         for _ in tqdm.tqdm(range(hparams.epochs)):
 
