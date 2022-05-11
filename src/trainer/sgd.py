@@ -63,7 +63,7 @@ def standard_process(hparams, net, criterion, train_dataloaders, test_dataloader
                 loss[task].append(train_loss)
 
                 ## test model on current and previous tasks
-                sub_task in range(task + 1):
+                for sub_task in range(task + 1):
                     testloader = test_dataloaders[sub_task]
                     net.set_task(sub_task)
                     test_acc = test_model(net, testloader, device)
@@ -76,7 +76,7 @@ def standard_process(hparams, net, criterion, train_dataloaders, test_dataloader
                 loss[task].append(train_loss)
 
                 ## test model on current and previous tasks
-                sub_task in range(task + 1):
+                for sub_task in range(task + 1):
                     testloader = test_dataloaders[sub_task]
                     net.set_task(sub_task)
                     test_acc = test_model(net, testloader, device)
