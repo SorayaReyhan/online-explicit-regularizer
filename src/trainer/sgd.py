@@ -38,7 +38,6 @@ def standard_process(hparams, net, criterion, train_dataloaders, test_dataloader
         for _ in tqdm.tqdm(range(hparams.epochs)):
 
             trainloader = train_dataloaders[task]
-
                 net.set_task(task)
                 train_loss = normal_train(net, optimizer, criterion, trainloader, device)
                 loss[task].append(train_loss)
