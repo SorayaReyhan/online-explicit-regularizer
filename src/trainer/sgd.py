@@ -29,7 +29,7 @@ def standard_process(hparams, net, criterion, train_dataloaders, test_dataloader
 
     loss, acc = {}, {}
     num_tasks = len(train_dataloaders)
-    net = self.net
+
     for task in range(num_tasks):
 
         loss[task] = []
