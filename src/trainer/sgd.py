@@ -44,15 +44,15 @@ def standard_process(hparams, net, criterion, train_dataloaders, test_dataloader
                         #param.requires_grad = False
                         #print(param.requires_grad)
                     #index+=1
-                    
+
             # freezing the first two convolutional layers after the traing and testing of the first task
-                index = 0
-                for child in net.modules():
-                    if (isinstance(child, nn.Conv2d)):
-                       for param in child.parameters():
-                            param.requires_grad = False
-                       print(param.requires_grad)
-                       index+=1
+            index = 0
+            for child in net.modules():
+                if (isinstance(child, nn.Conv2d)):
+                    for param in child.parameters():
+                        param.requires_grad = False
+                    print(param.requires_grad)
+                    index+=1
 
             # train model on the current task for n epochs
             for _ in tqdm.tqdm(range(hparams.epochs)):
