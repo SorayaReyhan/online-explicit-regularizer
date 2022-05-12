@@ -34,19 +34,48 @@ def standard_process(hparams, net, criterion, train_dataloaders, test_dataloader
 
         loss[task] = []
         acc[task] = []
-        # train model on the current task for n epochs
-        for _ in tqdm.tqdm(range(hparams.epochs)):
+        if task==1 : 
+            # freezing the first convolutional layer after the traing and testing of the first task
+            index = 0
+            for name, child in net.named_children():
+                if (isinstance(child, nn.Conv2d) and name=='conv1'):
+                    print(child)
+                    for param in child.parameters():
+                        param.requires_grad = False
+                        print(param.requires_grad)
+                    index+=1
 
-            trainloader = train_dataloaders[task]
-            net.set_task(task)
-            train_loss = normal_train(net, optimizer, criterion, trainloader, device)
-            loss[task].append(train_loss)
+            # train model on the current task for n epochs
+            for _ in tqdm.tqdm(range(hparams.epochs)):
 
-            ## test model on current and previous tasks
-            for sub_task in range(task + 1):
-                testloader = test_dataloaders[sub_task]
-                net.set_task(sub_task)
-                test_acc = test_model(net, testloader, device)
-                acc[sub_task].append(test_acc)
+                trainloader = train_dataloaders[task]
+                net.set_task(task)
+                train_loss = normal_train(net, optimizer, criterion, trainloader, device)
+                loss[task].append(train_loss)
+
+                ## test model on current and previous tasks
+                for sub_task in range(task + 1):
+                    testloader = test_dataloaders[sub_task]
+                    net.set_task(sub_task)
+                    test_acc = test_model(net, testloader, device)
+                    acc[sub_task].append(test_acc)
+            print(net.conv2.weight)
+        else:
+            # train model on the current task for n epochs
+            for _ in tqdm.tqdm(range(hparams.epochs)):
+
+                trainloader = train_dataloaders[task]
+                net.set_task(task)
+                train_loss = normal_train(net, optimizer, criterion, trainloader, device)
+                loss[task].append(train_loss)
+
+                ## test model on current and previous tasks
+                for sub_task in range(task + 1):
+                    testloader = test_dataloaders[sub_task]
+                    net.set_task(sub_task)
+                    test_acc = test_model(net, testloader, device)
+                    acc[sub_task].append(test_acc)
+            print(net.conv2.weight)
+
 
     return loss, acc
