@@ -18,7 +18,7 @@ class EWCTrainerHParams(EWCHparams):
     epochs: int = 50
     lr: float = 1e-3
     batch_size: int = 128
-    num_tasks: int = 3
+    num_tasks: int = 4
     importance: float = 1000
 
 
