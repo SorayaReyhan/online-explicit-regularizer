@@ -138,7 +138,7 @@ class EWCTrainer:
                 self.sgd_train(task, loss, acc)
             # for other tasks train with ewc regularization
             else:
-                if task==1 : 
+                #if task==1 : 
                     # freezing the first convolutional layer after the traing and testing of the first task
                     #index = 0
                     #for name, child in net.named_children():
@@ -157,12 +157,12 @@ class EWCTrainer:
                                 #param.requires_grad = False
                             #print(param.requires_grad)
                             #index+=1
-                    self.ewc_train(task, loss, acc)
+                    #self.ewc_train(task, loss, acc)
                     #print(net.conv2.weight)
-                else:
+                #else:
                     
-                    
-                    self.ewc_train(task, loss, acc)
+                ##    
+                self.ewc_train(task, loss, acc)
                     #print(net.conv2.weight)
 
         return loss, acc
