@@ -56,7 +56,7 @@ parser.add_argument("--batch_size", type=int, default=HParams.batch_size)
 parser.add_argument("--seed", type=int, default=HParams.seed)
 parser.add_argument("--importance", type=float, default=HParams.importance)
 parser.add_argument("--saliency_momentum", type=float, default=HParams.saliency_momentum)
-parser.add_argument("--singlehead", action="store_true")
+parser.add_argument("--singlehead", type=bool, action="store_true")
 
 args = parser.parse_args()
 
