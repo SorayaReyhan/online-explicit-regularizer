@@ -38,7 +38,7 @@ class HParams(EWCTrainerHParams, MnistMLPHParams, OnlineExplicitTrainerHParams):
     importance: float = 50000  # ewc importance value
     dropout: float = 0.0
     name: str = "exp"  # experiment name to append to folder name
-    singlehead:bool=True
+    singlehead:bool=False
 
 
 
