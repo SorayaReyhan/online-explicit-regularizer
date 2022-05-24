@@ -167,23 +167,23 @@ class OnlineExplicitTrainer:
             acc[task] = []
             if task==1 : 
                 #freezing the first convolutional layer after the traing and testing of the first task
-                index = 0
-                for name, child in net.named_children():
-                    if (isinstance(child, nn.Conv2d) and name=='conv1'):
-                        print(child)
-                        for param in child.parameters():
-                            param.requires_grad = False
-                        print(param.requires_grad)
-                        index+=1
-
-                # freezing the first two convolutional layers after the traing and testing of the first task
                 #index = 0
-                #for child in net.modules():
-                    #if (isinstance(child, nn.Conv2d)):
+                #for name, child in net.named_children():
+                    #if (isinstance(child, nn.Conv2d) and name=='conv1'):
+                        #print(child)
                         #for param in child.parameters():
                             #param.requires_grad = False
                         #print(param.requires_grad)
                         #index+=1
+
+                # freezing the first two convolutional layers after the traing and testing of the first task
+                index = 0
+                for child in net.modules():
+                    if (isinstance(child, nn.Conv2d)):
+                        for param in child.parameters():
+                            param.requires_grad = False
+                        print(param.requires_grad)
+                        index+=1
 
                 self.explicit_train(task, loss, acc)
                 print(net.conv2.weight)
