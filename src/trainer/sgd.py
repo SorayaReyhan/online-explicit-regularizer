@@ -34,7 +34,7 @@ def standard_process(hparams, net, criterion, train_dataloaders, test_dataloader
 
         loss[task] = []
         acc[task] = []
-        if task==1 : 
+        #if task==1 : 
             # freezing the first convolutional layer after the traing and testing of the first task
             #index = 0
             #for name, child in net.named_children():
