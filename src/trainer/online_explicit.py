@@ -49,8 +49,8 @@ def explicit_step(
             alp_new = imp[name] ** (1 / 2)  # alpha current
             alp_prev = prev_imp[name] ** (1 / 2)  # alpha previous
             alp = alp_new / (alp_new + alp_prev + 1e-20)  # R_j
-            print(alp)
             param.data = alp * param.data + (1 - alp) * prev_param.data  # interpolation
+    print(alp)
             
 
 
