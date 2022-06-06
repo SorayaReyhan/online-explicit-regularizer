@@ -95,6 +95,11 @@ class Logger:
         avg_acc_task = [0] * hparams.num_tasks
         for task in range(hparams.num_tasks):
             avg_acc_task[task] = sum(acc[task]) / len(acc[task])
+        
+        # calculate average R
+        avg_acc_task = [0] * hparams.num_tasks
+        for task in range(hparams.num_tasks):
+            avg_acc_task[task] = sum(alp[task]) / len(alp[task])
 
         # calculate last accuracy
         final_acc_task = [0] * hparams.num_tasks
