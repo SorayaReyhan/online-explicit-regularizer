@@ -54,7 +54,7 @@ def explicit_step(
             alp_prev = prev_imp[name] ** (1 / 2)  # alpha previous
             alp = alp_new / (alp_new + alp_prev + 1e-20)  # R_j
             param.data = alp * param.data + (1 - alp) * prev_param.data  # interpolation
-            print(alp)
+            print(alp,'alp')
             #sum_alp=alp+sum_alp
     #avg_alp=sum_alp/i
     #print(avg_alp)
