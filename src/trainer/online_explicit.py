@@ -168,8 +168,9 @@ class OnlineExplicitTrainer:
                 test_acc = test_model(net, testloader, self.device)
                 acc[sub_task].append(test_acc)
         
-        alp_mean_by_task = mean_list_alp=torch.mean(torch.stack(alp_list), dim=0)
-        print(alp_mean_by_task)
+        if len(alp_list) > 0:
+            alp_mean_by_task = mean_list_alp=torch.mean(torch.stack(alp_list), dim=0)
+            print(alp_mean_by_task)
 
     def run(self):
         """Run continual learning. Train on tasks sequentially.
