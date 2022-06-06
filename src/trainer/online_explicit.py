@@ -58,6 +58,7 @@ def explicit_step(
             #print(torch.mean(alp),'alp')
             list_alp.append(torch.mean(alp))
             mean_list_alp=torch.mean(torch.stack(list_alp), dim=0)
+            print(mean_list_alp)
             #list_mean_list_alp.append(mean_list_alp)
             #print(torch.mean(torch.stack(list_mean_list_alp)))
 
