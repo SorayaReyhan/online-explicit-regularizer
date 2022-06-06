@@ -82,16 +82,16 @@ class Logger:
         self.save_plt_img(generate_filename(title))
         plt.show()
 
-    def alp_plot(self, x, title):
-        epochs = self.hparams.epochs
-        for t, v in x.items():
-            plt.plot(list(range(t * epochs, (t + 1) * epochs)), v, label=f"task-{t}")
-        plt.xlabel("epoch")
-        plt.title(title)
-        plt.legend()
+    #def alp_plot(self, x, title):
+        #epochs = self.hparams.epochs
+        #for t, v in x.items():
+            #plt.plot(list(range(t * epochs, (t + 1) * epochs)), v, label=f"task-{t}")
+        #plt.xlabel("epoch")
+        #plt.title(title)
+        #plt.legend()
 
-        self.save_plt_img(generate_filename(title))
-        plt.show()
+        #self.save_plt_img(generate_filename(title))
+        #plt.show()
 
     def log_experiment_results(self, loss, acc, alp, name):
         hparams = self.hparams
@@ -102,8 +102,8 @@ class Logger:
         plt.figure()
         self.accuracy_plot(acc, f"Accuracies ({name})")
 
-        plt.figure()
-        self.alp_plot(acc, f"Alp ({name})")
+        #plt.figure()
+        #self.alp_plot(acc, f"Alp ({name})")
 
         # calculate average accuracy
         avg_acc_task = [0] * hparams.num_tasks
@@ -111,9 +111,9 @@ class Logger:
             avg_acc_task[task] = sum(acc[task]) / len(acc[task])
         
         # calculate average R
-        avg_alp_task = [0] * hparams.num_tasks
-        for task in range(hparams.num_tasks):
-            avg_alp_task[task] = sum(alp[task]) / len(alp[task])
+        #avg_alp_task = [0] * hparams.num_tasks
+        #for task in range(hparams.num_tasks):
+        #    avg_alp_task[task] = sum(alp[task]) / len(alp[task])
 
         # calculate last accuracy
         final_acc_task = [0] * hparams.num_tasks
@@ -130,7 +130,7 @@ class Logger:
         # write loss, acc
         self.write_json(
             {
-                "avg_alp_task": avg_alp_task, 
+                #"avg_alp_task": avg_alp_task, 
                 "avg_forgetting": avg_forgetting,
                 "avg_acc_task": avg_acc_task,
                 "final_acc_task": final_acc_task,
