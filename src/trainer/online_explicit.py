@@ -55,8 +55,8 @@ def explicit_step(
             alp = alp_new / (alp_new + alp_prev + 1e-20)  # R_j
             param.data = alp * param.data + (1 - alp) * prev_param.data  # interpolation
             sum_a=alp+sum_alp
-        avg_alp=sum_alp/i
-        print(avg_alp)
+    avg_alp=sum_alp/i
+    print(avg_alp)
 
             
 class OnlineExplicitTrainer:
