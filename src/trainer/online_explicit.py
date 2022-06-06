@@ -59,7 +59,7 @@ def explicit_step(
             list_alp.append(torch.mean(alp))
             mean_list_alp=torch.mean(torch.stack(list_alp))
             list_mean_list_alp.append(mean_list_alp)
-            print(torch.mean(list_mean_list_alp))
+            print(torch.mean(torch.stack(list_mean_list_alp)))
 
 
 
