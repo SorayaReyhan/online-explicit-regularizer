@@ -50,10 +50,7 @@ def explicit_step(
             alp_prev = prev_imp[name] ** (1 / 2)  # alpha previous
             alp = alp_new / (alp_new + alp_prev + 1e-20)  # R_j
             param.data = alp * param.data + (1 - alp) * prev_param.data  # interpolation
-    print(alp)
             
-
-
 class OnlineExplicitTrainer:
     """Trainer class that sequentially trains on a set of tasks with EWC regularization.
     """
@@ -147,7 +144,9 @@ class OnlineExplicitTrainer:
         for _ in tqdm(range(self.hparams.epochs)):
             net.set_task(task)
             train_loss = self.explicit_train_epoch(task, net_prev, prev_imp)
+            train_alp=self.explicit_train_epoch(task, net_prev, prev_imp)
             loss[task].append(train_loss)
+            alp=[task].append(train_alp)
 
             # test model on current and previous tasks
             for sub_task in range(task + 1):
@@ -162,11 +161,12 @@ class OnlineExplicitTrainer:
         Returns train losses and test accuracies for all tasks at each epoch.
         """
 
-        loss, acc = {}, {}
+        loss, acc , alp= {}, {}, {}
         net = self.net
         for task in range(self.hparams.num_tasks):
             loss[task] = []
             acc[task] = []
+            alp[task]=[]
             if task==1 : 
                 #freezing the first convolutional layer after the traing and testing of the first task
                 #index = 0
@@ -187,10 +187,10 @@ class OnlineExplicitTrainer:
                         #print(param.requires_grad)
                         #index+=1
 
-                self.explicit_train(task, loss, acc)
+                self.explicit_train(task, loss, acc, alp)
                 #print(net.conv2.weight)
             else:
-                self.explicit_train(task, loss, acc)
+                self.explicit_train(task, loss, acc, alp)
                 #print(net.conv2.weight)
 
-        return loss, acc
+        return loss, acc, alp
