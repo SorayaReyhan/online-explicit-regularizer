@@ -13,6 +13,7 @@ from src.regularizer.base import Regularizer
 from src.trainer.test import test_model
 from src.trainer.utils import normalize
 
+alp_list: List = []
 
 class OnlineExplicitTrainerHParams:
     normalize_saliency = False
@@ -42,9 +43,8 @@ def AGC(net: nn.Module, optimizer):
 def explicit_step(
     net: nn.Module, net_prev: nn.Module, imp: Dict[str, torch.Tensor], prev_imp: Dict[str, torch.Tensor],
 ):
+    global list_alp
     net_prev_params = net_prev.state_dict()
-    list_alp=[]
-    list_mean_list_alp=[]
 
     
     for name, param in net.named_parameters():
@@ -60,8 +60,7 @@ def explicit_step(
             #list_mean_list_alp.append(mean_list_alp)
             #print(torch.mean(torch.stack(list_mean_list_alp)))
 
-    mean_list_alp=torch.mean(torch.stack(list_alp), dim=0)
-    print(mean_list_alp)
+    # print(mean_list_alp)
 
             
 class OnlineExplicitTrainer:
@@ -140,7 +139,8 @@ class OnlineExplicitTrainer:
 
     def explicit_train(self, task: int, loss, acc):
         """Train model on a task with explicit interpolation regularization."""
-
+        global alp_list
+        alp_list = []
         # n = task
 
         net = self.net
@@ -167,6 +167,9 @@ class OnlineExplicitTrainer:
                 testloader = self.test_dataloaders[sub_task]
                 test_acc = test_model(net, testloader, self.device)
                 acc[sub_task].append(test_acc)
+        
+        alp_mean_by_task = mean_list_alp=torch.mean(torch.stack(list_alp), dim=0)
+        print(alp_mean_by_task)
 
     def run(self):
         """Run continual learning. Train on tasks sequentially.
