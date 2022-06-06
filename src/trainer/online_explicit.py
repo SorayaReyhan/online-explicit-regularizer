@@ -125,7 +125,7 @@ class OnlineExplicitTrainer:
 
         return epoch_loss / len(dataloader)
 
-    def explicit_train(self, task: int, loss, acc):
+    def explicit_train(self, task: int, loss, acc, alp):
         """Train model on a task with explicit interpolation regularization."""
 
         # n = task
