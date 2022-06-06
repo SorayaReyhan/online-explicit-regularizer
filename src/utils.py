@@ -82,7 +82,7 @@ class Logger:
         self.save_plt_img(generate_filename(title))
         plt.show()
 
-    def log_experiment_results(self, loss, acc, name):
+    def log_experiment_results(self, loss, acc, alp, name):
         hparams = self.hparams
 
         plt.figure()
@@ -97,9 +97,9 @@ class Logger:
             avg_acc_task[task] = sum(acc[task]) / len(acc[task])
         
         # calculate average R
-        avg_acc_task = [0] * hparams.num_tasks
+        avg_alp_task = [0] * hparams.num_tasks
         for task in range(hparams.num_tasks):
-            avg_acc_task[task] = sum(alp[task]) / len(alp[task])
+            avg_alp_task[task] = sum(alp[task]) / len(alp[task])
 
         # calculate last accuracy
         final_acc_task = [0] * hparams.num_tasks
