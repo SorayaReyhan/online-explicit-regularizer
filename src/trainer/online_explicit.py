@@ -43,9 +43,9 @@ def explicit_step(
     net: nn.Module, net_prev: nn.Module, imp: Dict[str, torch.Tensor], prev_imp: Dict[str, torch.Tensor],
 ):
     net_prev_params = net_prev.state_dict()
-    avg_alp=0
-    sum_alp=0
-    i=0
+    #avg_alp=0
+    #sum_alp=0
+    #i=0
     for name, param in net.named_parameters():
         i=i+1
         if param.grad is not None:
@@ -54,7 +54,7 @@ def explicit_step(
             alp_prev = prev_imp[name] ** (1 / 2)  # alpha previous
             alp = alp_new / (alp_new + alp_prev + 1e-20)  # R_j
             param.data = alp * param.data + (1 - alp) * prev_param.data  # interpolation
-            sum_a=alp+sum_alp
+            sum_alp=alp+sum_alp
     avg_alp=sum_alp/i
     print(avg_alp)
 
