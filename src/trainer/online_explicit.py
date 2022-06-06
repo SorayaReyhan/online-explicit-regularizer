@@ -56,7 +56,7 @@ def explicit_step(
             param.data = alp * param.data + (1 - alp) * prev_param.data  # interpolation
             #print(torch.mean(alp),'alp')
             list_alp.append(torch.mean(alp))
-            print(list_alp)
+            print(torch.mean(torch.stack(list_alp)))
 
 
 
