@@ -45,10 +45,9 @@ def explicit_step(
     net_prev_params = net_prev.state_dict()
     list_alp=[]
     list_mean_list_alp=[]
-    i=0
+
     
     for name, param in net.named_parameters():
-        i=i+1
         if param.grad is not None:
             prev_param = net_prev_params[name]
             alp_new = imp[name] ** (1 / 2)  # alpha current
@@ -58,9 +57,9 @@ def explicit_step(
             #print(torch.mean(alp),'alp')
             list_alp.append(torch.mean(alp))
             mean_list_alp=torch.mean(torch.stack(list_alp), dim=0)
-            #print(mean_list_alp)
-            list_mean_list_alp.append(mean_list_alp)
-            print(torch.mean(torch.stack(list_mean_list_alp)))
+            print(mean_list_alp)
+            #list_mean_list_alp.append(mean_list_alp)
+            #print(torch.mean(torch.stack(list_mean_list_alp)))
 
 
 
