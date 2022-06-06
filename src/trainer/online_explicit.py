@@ -125,7 +125,7 @@ class OnlineExplicitTrainer:
 
         return epoch_loss / len(dataloader)
 
-    def explicit_train(self, task: int, loss, acc, alp):
+    def explicit_train(self, task: int, loss, acc):
         """Train model on a task with explicit interpolation regularization."""
 
         # n = task
@@ -166,7 +166,7 @@ class OnlineExplicitTrainer:
         for task in range(self.hparams.num_tasks):
             loss[task] = []
             acc[task] = []
-            alp[task]=[]
+            #alp[task]=[]
             if task==1 : 
                 #freezing the first convolutional layer after the traing and testing of the first task
                 #index = 0
@@ -187,10 +187,10 @@ class OnlineExplicitTrainer:
                         #print(param.requires_grad)
                         #index+=1
 
-                self.explicit_train(task, loss, acc, alp)
+                self.explicit_train(task, loss, acc)
                 #print(net.conv2.weight)
             else:
-                self.explicit_train(task, loss, acc, alp)
+                self.explicit_train(task, loss, acc)
                 #print(net.conv2.weight)
 
-        return loss, acc, alp
+        return loss, acc
