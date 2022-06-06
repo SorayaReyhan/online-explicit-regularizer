@@ -44,6 +44,7 @@ def explicit_step(
 ):
     net_prev_params = net_prev.state_dict()
     list_alp=[]
+    list_mean_list_alp=[]
     i=0
     
     for name, param in net.named_parameters():
