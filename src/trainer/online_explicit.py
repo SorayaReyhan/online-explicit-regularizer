@@ -57,9 +57,9 @@ def explicit_step(
             param.data = alp * param.data + (1 - alp) * prev_param.data  # interpolation
             #print(torch.mean(alp),'alp')
             list_alp.append(torch.mean(alp))
-            mean_list_alp=torch.mean(torch.stack(list_alp))
-            list_mean_list_alp.append(mean_list_alp)
-            print(torch.mean(torch.stack(list_mean_list_alp)))
+            mean_list_alp=torch.mean(torch.stack(list_alp), dim=0)
+            #list_mean_list_alp.append(mean_list_alp)
+            #print(torch.mean(torch.stack(list_mean_list_alp)))
 
 
 
