@@ -43,7 +43,7 @@ def AGC(net: nn.Module, optimizer):
 def explicit_step(
     net: nn.Module, net_prev: nn.Module, imp: Dict[str, torch.Tensor], prev_imp: Dict[str, torch.Tensor],
 ):
-    global list_alp
+    global alp_list
     net_prev_params = net_prev.state_dict()
 
     
@@ -55,7 +55,7 @@ def explicit_step(
             alp = alp_new / (alp_new + alp_prev + 1e-20)  # R_j
             param.data = alp * param.data + (1 - alp) * prev_param.data  # interpolation
             #print(torch.mean(alp),'alp')
-            list_alp.append(torch.mean(alp))
+            alp_list.append(torch.mean(alp))
             
             #list_mean_list_alp.append(mean_list_alp)
             #print(torch.mean(torch.stack(list_mean_list_alp)))
@@ -168,7 +168,7 @@ class OnlineExplicitTrainer:
                 test_acc = test_model(net, testloader, self.device)
                 acc[sub_task].append(test_acc)
         
-        alp_mean_by_task = mean_list_alp=torch.mean(torch.stack(list_alp), dim=0)
+        alp_mean_by_task = mean_list_alp=torch.mean(torch.stack(alp_list), dim=0)
         print(alp_mean_by_task)
 
     def run(self):
