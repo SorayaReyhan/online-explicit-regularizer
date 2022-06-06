@@ -131,5 +131,5 @@ elif hparams.trainer == "online_explicit_ewc":
     ewc_trainer = OnlineExplicitTrainer(
         hparams, model, criterion, regularizer, train_dataloaders, test_dataloaders, DEVICE
     )
-    loss_explicit_ewc, acc_explicit_ewc = ewc_trainer.run()
-    logger.log_experiment_results(loss_explicit_ewc, acc_explicit_ewc, name="explicit ewc")
+    loss_explicit_ewc, acc_explicit_ewc, alp_explicit_ewc = ewc_trainer.run()
+    logger.log_experiment_results(loss_explicit_ewc, acc_explicit_ewc, alp_explicit_ewc, name="explicit ewc")
