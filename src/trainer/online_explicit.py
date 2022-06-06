@@ -146,7 +146,7 @@ class OnlineExplicitTrainer:
             train_loss = self.explicit_train_epoch(task, net_prev, prev_imp)
             train_alp=self.explicit_train_epoch(task, net_prev, prev_imp)
             loss[task].append(train_loss)
-            alp=[task].append(train_alp)
+            alp[task].append(train_alp)
 
             # test model on current and previous tasks
             for sub_task in range(task + 1):
