@@ -93,7 +93,7 @@ class Logger:
         #self.save_plt_img(generate_filename(title))
         #plt.show()
 
-    def log_experiment_results(self, loss, acc, alp, name):
+    def log_experiment_results(self, loss, acc, name):
         hparams = self.hparams
 
         plt.figure()
