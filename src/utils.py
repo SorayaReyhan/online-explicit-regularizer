@@ -85,9 +85,7 @@ class Logger:
     def alp_plot(self, x, title):
         epochs = self.hparams.epochs
         for t, v in x.items():
-            xticks = [i + t * epochs for i in range(len(v))]
-            plt.plot(xticks, v, label=f"task-{t}")
-        plt.ylim(-0.1, 1.1)
+            plt.plot(list(range(t * epochs, (t + 1) * epochs)), v, label=f"task-{t}")
         plt.xlabel("epoch")
         plt.title(title)
         plt.legend()
