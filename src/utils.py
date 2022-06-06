@@ -82,6 +82,19 @@ class Logger:
         self.save_plt_img(generate_filename(title))
         plt.show()
 
+    def alp_plot(self, x, title):
+        epochs = self.hparams.epochs
+        for t, v in x.items():
+            xticks = [i + t * epochs for i in range(len(v))]
+            plt.plot(xticks, v, label=f"task-{t}")
+        plt.ylim(-0.1, 1.1)
+        plt.xlabel("epoch")
+        plt.title(title)
+        plt.legend()
+
+        self.save_plt_img(generate_filename(title))
+        plt.show()
+
     def log_experiment_results(self, loss, acc, alp, name):
         hparams = self.hparams
 
@@ -90,6 +103,9 @@ class Logger:
 
         plt.figure()
         self.accuracy_plot(acc, f"Accuracies ({name})")
+
+        plt.figure()
+        self.alp_plot(acc, f"Alp ({name})")
 
         # calculate average accuracy
         avg_acc_task = [0] * hparams.num_tasks
@@ -116,6 +132,7 @@ class Logger:
         # write loss, acc
         self.write_json(
             {
+                "avg_alp_task": avg_alp_task
                 "avg_forgetting": avg_forgetting,
                 "avg_acc_task": avg_acc_task,
                 "final_acc_task": final_acc_task,
