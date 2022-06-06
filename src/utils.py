@@ -132,7 +132,7 @@ class Logger:
         # write loss, acc
         self.write_json(
             {
-                "avg_alp_task": avg_alp_task
+                "avg_alp_task": avg_alp_task, 
                 "avg_forgetting": avg_forgetting,
                 "avg_acc_task": avg_acc_task,
                 "final_acc_task": final_acc_task,
