@@ -21,8 +21,8 @@ class Vanilla_cnn(MultiHeadClassifierBase):
         self.linear4 = nn.Linear(128, 50)
         self.relu2 = nn.ReLU()
 
-        #self.heads = nn.ModuleList([nn.Linear(50, hparams.num_classes) for _ in range(hparams.num_tasks)])
-        self.heads = nn.ModuleList([nn.Linear(50, hparams.num_classes)] * hparams.num_tasks if hparams.singlehead else [nn.Linear(50, hparams.num_classes) for _ in range(hparams.num_tasks)] )
+        self.heads = nn.ModuleList([nn.Linear(50, hparams.num_classes) for _ in range(hparams.num_tasks)])
+        #self.heads = nn.ModuleList([nn.Linear(50, hparams.num_classes)] * hparams.num_tasks if hparams.singlehead else [nn.Linear(50, hparams.num_classes) for _ in range(hparams.num_tasks)] )
 
     def forward(self, input, task=None):
         assert self.task is not None, "Did you forget to set the task?"
