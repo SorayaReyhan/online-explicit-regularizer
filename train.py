@@ -115,7 +115,7 @@ criterion = nn.CrossEntropyLoss()
 
 #%%
 # train
-buffer_size=300
+buffer_size=30
 train_dataloaders_0_1, train_dataloaders_0_2, train_dataloaders_0_3, train_dataloaders_0_4 =[], [], [], []
 train_dataloaders_1_2, train_dataloaders_1_3, train_dataloaders_1_4=[], [], []
 train_dataloaders_2_3, train_dataloaders_2_4=[], []
