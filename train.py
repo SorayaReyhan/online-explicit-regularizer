@@ -217,8 +217,8 @@ train_dev_sets = torch.utils.data.ConcatDataset([train_dataloaders[0], train_dat
 train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders[2]])
 train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders[3]])
 train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders[4]])
-train_dev_loader = DataLoader(dataset=train_dev_sets)
-train_dataloaders = train_dev_loader.dataset
+train_dev_loader = DataLoader(dataset=train_dev_sets,num_workers=0)
+train_dataloaders = train_dev_loader
 
 
 logger = Logger(hparams)
