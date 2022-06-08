@@ -38,7 +38,8 @@ class HParams(EWCTrainerHParams, MnistMLPHParams, OnlineExplicitTrainerHParams):
     importance: float = 50000  # ewc importance value
     dropout: float = 0.0
     name: str = "exp"  # experiment name to append to folder name
-    singlehead:bool=False
+    singlehead:bool = False
+    buffer_size: int = 300
 
 
 
@@ -58,6 +59,7 @@ parser.add_argument("--importance", type=float, default=HParams.importance)
 parser.add_argument("--saliency_momentum", type=float, default=HParams.saliency_momentum)
 #parser.add_argument("--singlehead", action="store_true")
 parser.add_argument("--singlehead", type=bool)
+parser.add_argument("--buffer_size", type=int, default=HParams.buffer_size)
 
 args = parser.parse_args()
 
@@ -112,6 +114,80 @@ criterion = nn.CrossEntropyLoss()
 
 #%%
 # train
+# task1 
+iterator1 = iter(train_dataloaders[0])
+for i in range(buffer_size):
+    images, labels = next(iterator1)
+    train_dataloaders_0_1.append(images, labels)
+# task2 
+iterator2 = iter(train_dataloaders[0])
+for i in range(buffer_size/2):
+    images, labels = next(iterator2)
+    train_dataloaders_0_2.append(images, labels)
+
+iterator3 = iter(train_dataloaders[1])
+for i in range(buffer_size/2):
+    images, labels = next(iterator3)
+    train_dataloaders_1_2.append(images, labels)
+# task3
+iterator4 = iter(train_dataloaders[0])
+for i in range(buffer_size/3):
+    images, labels = next(iterator4)
+    train_dataloaders_0_3.append(images, labels)
+
+iterator5 = iter(train_dataloaders[1])
+for i in range(buffer_size/3):
+    images, labels = next(iterator5)
+    train_dataloaders_1_3.append(images, labels)
+
+iterator6 = iter(train_dataloaders[2])
+for i in range(buffer_size/3):
+    images, labels = next(iterator6)
+    train_dataloaders_2_3.append(images, labels)
+# task4
+iterator7 = iter(train_dataloaders[0])
+for i in range(buffer_size/4):
+    images, labels = next(iterator7)
+    train_dataloaders_0_4.append(images, labels)
+
+iterator8 = iter(train_dataloaders[1])
+for i in range(buffer_size/4):
+    images, labels = next(iterator8)
+    train_dataloaders_1_4.append(images, labels)
+
+iterator9 = iter(train_dataloaders[2])
+for i in range(buffer_size/4):
+    images, labels = next(iterator9)
+    train_dataloaders_2_4.append(images, labels)
+
+iterator10 = iter(train_dataloaders[3])
+for i in range(buffer_size/4):
+    images, labels = next(iterator10)
+    train_dataloaders_3_4.append(images, labels)
+
+
+for task in range(num_tasks):
+    if task==1:
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_1)
+    elif task==2:
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_2)
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_2)
+    elif task==3:
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_3)
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_3)
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_2_3])
+    elif task==4:
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_4)
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_4)
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_2_4)
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_3_4)
+
+
+    
+
+
+
+
 
 logger = Logger(hparams)
 
@@ -133,3 +209,5 @@ elif hparams.trainer == "online_explicit_ewc":
     )
     loss_explicit_ewc, acc_explicit_ewc= ewc_trainer.run()
     logger.log_experiment_results(loss_explicit_ewc, acc_explicit_ewc, name="explicit ewc")
+
+
