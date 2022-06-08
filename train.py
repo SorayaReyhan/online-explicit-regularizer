@@ -21,6 +21,7 @@ from src.trainer.online_explicit import (OnlineExplicitTrainer,
                                          OnlineExplicitTrainerHParams)
 from src.trainer.sgd import standard_process
 from src.utils import Logger, seed_everything
+from torch.utils.data import DataLoader , TensorDataset
 
 
 @dataclass
@@ -122,53 +123,63 @@ train_dataloaders_2_3, train_dataloaders_2_4=[], []
 # task1 
 iterator1 = iter(train_dataloaders[0])
 for i in range(buffer_size):
-    images, labels = next(iterator1)
-    train_dataloaders_0_1.append(images, labels)
+    images1, labels1 = next(iterator1)
+    dataset1 = TensorDataset(images1 , labels1)
+    train_dataloaders_0_1=DataLoader(dataset1 , batch_size = 32, shuffle=True)
 # task2 
 iterator2 = iter(train_dataloaders[0])
 for i in range(buffer_size/2):
-    images, labels = next(iterator2)
-    train_dataloaders_0_2.append(images, labels)
+    images2, labels2 = next(iterator2)
+    dataset2 = TensorDataset(images2 , labels2)
+    train_dataloaders_0_2=DataLoader(dataset2 , batch_size = 32, shuffle=True)
 
 iterator3 = iter(train_dataloaders[1])
 for i in range(buffer_size/2):
-    images, labels = next(iterator3)
-    train_dataloaders_1_2.append(images, labels)
+    images3, labels3 = next(iterator3)
+    dataset3 = TensorDataset(images3 , labels3)
+    train_dataloaders_1_2=DataLoader(dataset3 , batch_size = 32, shuffle=True)
 # task3
 iterator4 = iter(train_dataloaders[0])
 for i in range(buffer_size/3):
-    images, labels = next(iterator4)
-    train_dataloaders_0_3.append(images, labels)
+    images4, labels4 = next(iterator4)
+    dataset4 = TensorDataset(images4 , labels4)
+    train_dataloaders_0_3=DataLoader(dataset4 , batch_size = 32, shuffle=True)
 
 iterator5 = iter(train_dataloaders[1])
 for i in range(buffer_size/3):
-    images, labels = next(iterator5)
-    train_dataloaders_1_3.append(images, labels)
+    images5, labels5 = next(iterator5)
+    dataset5 = TensorDataset(images5 , labels5)
+    train_dataloaders_1_3=DataLoader(dataset5 , batch_size = 32, shuffle=True)
 
 iterator6 = iter(train_dataloaders[2])
 for i in range(buffer_size/3):
-    images, labels = next(iterator6)
-    train_dataloaders_2_3.append(images, labels)
+    images6, labels6 = next(iterator6)
+    dataset6 = TensorDataset(images6 , labels6)
+    train_dataloaders_2_3=DataLoader(dataset6 , batch_size = 32, shuffle=True)
 # task4
 iterator7 = iter(train_dataloaders[0])
 for i in range(buffer_size/4):
-    images, labels = next(iterator7)
-    train_dataloaders_0_4.append(images, labels)
+    images7, labels7 = next(iterator7)
+    dataset7 = TensorDataset(images7 , labels7)
+    train_dataloaders_0_4=DataLoader(dataset7 , batch_size = 32, shuffle=True)
 
 iterator8 = iter(train_dataloaders[1])
 for i in range(buffer_size/4):
-    images, labels = next(iterator8)
-    train_dataloaders_1_4.append(images, labels)
+    images8, labels8 = next(iterator8)
+    dataset8 = TensorDataset(images8 , labels8)
+    train_dataloaders_1_4=DataLoader(dataset8 , batch_size = 32, shuffle=True)
 
 iterator9 = iter(train_dataloaders[2])
 for i in range(buffer_size/4):
-    images, labels = next(iterator9)
-    train_dataloaders_2_4.append(images, labels)
+    images9, labels9 = next(iterator9)
+    dataset9 = TensorDataset(images9 , labels9)
+    train_dataloaders_2_4=DataLoader(dataset9 , batch_size = 32, shuffle=True)
 
 iterator10 = iter(train_dataloaders[3])
 for i in range(buffer_size/4):
-    images, labels = next(iterator10)
-    train_dataloaders_3_4.append(images, labels)
+    images10, labels10 = next(iterator10)
+    dataset10= TensorDataset(images10 , labels10)
+    train_dataloaders_3_4=DataLoader(dataset9 , batch_size = 32, shuffle=True)
 
 
 for task in range(num_tasks):
