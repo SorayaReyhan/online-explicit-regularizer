@@ -128,13 +128,13 @@ for i in range(buffer_size):
     train_dataloaders_0_1=DataLoader(dataset1 , batch_size = 32, shuffle=True)
 # task2 
 iterator2 = iter(train_dataloaders[0])
-for i in range(buffer_size/2):
+for i in range(int[buffer_size/2]):
     images2, labels2 = next(iterator2)
     dataset2 = TensorDataset(images2 , labels2)
     train_dataloaders_0_2=DataLoader(dataset2 , batch_size = 32, shuffle=True)
 
 iterator3 = iter(train_dataloaders[1])
-for i in range(buffer_size/2):
+for i in range(int[buffer_size/2]):
     images3, labels3 = next(iterator3)
     dataset3 = TensorDataset(images3 , labels3)
     train_dataloaders_1_2=DataLoader(dataset3 , batch_size = 32, shuffle=True)
