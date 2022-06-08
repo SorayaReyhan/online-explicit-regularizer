@@ -130,50 +130,50 @@ for i in range(buffer_size):
 # task2 
 for i in range(int(buffer_size/2)):
     samples2 = next(iter(train_dataloaders[0]))
-    dataset2 = TensorDataset(samples2)
-    train_dataloaders_0_2.append(DataLoader(dataset2 , batch_size = 32, shuffle=True))
+    #dataset2 = TensorDataset(samples2)
+    train_dataloaders_0_2.append(DataLoader(samples2 , batch_size = 32, shuffle=True))
 
 for i in range(int(buffer_size/2)):
     samples3 = next(iter(train_dataloaders[1]))
-    dataset3 = TensorDataset(samples3)
-    train_dataloaders_1_2.append(DataLoader(dataset3 , batch_size = 32, shuffle=True))
+    #dataset3 = TensorDataset(samples3)
+    train_dataloaders_1_2.append(DataLoader(samples3 , batch_size = 32, shuffle=True))
 
 # task3
 for i in range(int(buffer_size/3)):
     samples4 = next(iter(train_dataloaders[0]))
-    dataset4 = TensorDataset(samples4)
-    train_dataloaders_0_3.append(DataLoader(dataset4 , batch_size = 32, shuffle=True))
+    #dataset4 = TensorDataset(samples4)
+    train_dataloaders_0_3.append(DataLoader(samples4 , batch_size = 32, shuffle=True))
 
 for i in range(int(buffer_size/3)):
     samples5 = next(iter(train_dataloaders[1]))
-    dataset5 = TensorDataset(samples5)
-    train_dataloaders_1_3.append(DataLoader(dataset5 , batch_size = 32, shuffle=True))
+    #dataset5 = TensorDataset(samples5)
+    train_dataloaders_1_3.append(DataLoader(samples5 , batch_size = 32, shuffle=True))
 
 for i in range(int(buffer_size/3)):
     samples6 = next(iter(train_dataloaders[2]))
-    dataset6 = TensorDataset(samples6)
-    train_dataloaders_2_3.append(DataLoader(dataset6 , batch_size = 32, shuffle=True))
+    #dataset6 = TensorDataset(samples6)
+    train_dataloaders_2_3.append(DataLoader(samples6, batch_size = 32, shuffle=True))
 
 # task4
 for i in range(int(buffer_size/4)):
     samples7 = next(iter(train_dataloaders[0]))
-    dataset7 = TensorDataset(samples7)
-    train_dataloaders_0_4.append(DataLoader(dataset7 , batch_size = 32, shuffle=True))
+    #dataset7 = TensorDataset(samples7)
+    train_dataloaders_0_4.append(DataLoader(samples7 , batch_size = 32, shuffle=True))
 
 for i in range(int(buffer_size/4)):
     samples8 = next(iter(train_dataloaders[1]))
-    dataset8 = TensorDataset(samples8)
-    train_dataloaders_1_4.append(DataLoader(dataset8 , batch_size = 32, shuffle=True))
+    #dataset8 = TensorDataset(samples8)
+    train_dataloaders_1_4.append(DataLoader(samples8 , batch_size = 32, shuffle=True))
 
 for i in range(int(buffer_size/4)):
     samples9 = next(iter(train_dataloaders[2]))
-    dataset9 = TensorDataset(samples9)
-    train_dataloaders_2_4.append(DataLoader(dataset9 , batch_size = 32, shuffle=True))
+    #dataset9 = TensorDataset(samples9)
+    train_dataloaders_2_4.append(DataLoader(samples9 , batch_size = 32, shuffle=True))
 
 for i in range(int(buffer_size/4)):
     samples10 = next(iter(train_dataloaders[3]))
-    dataset10 = TensorDataset(samples10)
-    train_dataloaders_3_4.append(DataLoader(dataset10 , batch_size = 32, shuffle=True))
+    #dataset10 = TensorDataset(samples10)
+    train_dataloaders_3_4.append(DataLoader(samples10 , batch_size = 32, shuffle=True))
 
 
 for task in range(num_tasks):
