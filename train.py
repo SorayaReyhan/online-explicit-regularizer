@@ -21,7 +21,7 @@ from src.trainer.online_explicit import (OnlineExplicitTrainer,
                                          OnlineExplicitTrainerHParams)
 from src.trainer.sgd import standard_process
 from src.utils import Logger, seed_everything
-from torch.utils.data import DataLoader , TensorDataset
+from torch.utils.data import DataLoader , TensorDataset, ConcatDataset
 
 
 @dataclass
