@@ -186,7 +186,7 @@ for i in range(int(buffer_size/4)):
 for task in range(num_tasks):
     if task==1:
         #train_dataloaders[task]=train_dataloaders[task].cat(train_dataloaders_0_1)
-        train_dataloaders[task]=torch.utils.data.DataLoader(torch.utils.data.ConcatDataset(train_dataloaders[task],train_dataloaders_0_1))
+        train_dataloaders[task]=torch.utils.data.DataLoader(ConcatDataset(train_dataloaders[task],train_dataloaders_0_1))
     elif task==2:
         train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_2)
         train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_2)
