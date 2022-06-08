@@ -175,7 +175,7 @@ for task in range(num_tasks):
     elif task==3:
         train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_3)
         train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_3)
-        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_2_3])
+        train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_2_3)
     elif task==4:
         train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_4)
         train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_4)
