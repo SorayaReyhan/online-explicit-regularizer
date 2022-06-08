@@ -127,7 +127,7 @@ for i in range(buffer_size):
     #images1, labels1 = next(iter(train_dataloaders[0]))
     #dataset1 = TensorDataset(images1 , labels1)
     samples1 = next(iter(train_dataloaders[0]))
-    dataset1 = TensorDataset(samples1)
+    dataset1.append(TensorDataset(samples1))
 train_dataloaders_0_1=DataLoader(dataset1 , batch_size = 32, shuffle=True)
 # task2 
 #iterator2 = iter(train_dataloaders[0])
