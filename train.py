@@ -208,12 +208,12 @@ for task in range(num_tasks):
         train_dev_loader = DataLoader(dataset=train_dev_sets)
         train_dataloaders[task] = train_dev_loader
 
-train_dev_sets = torch.utils.data.ConcatDataset([train_dataloaders[0], train_dataloaders[1]])
-train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders[2]])
-train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders[3]])
-train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders[4]])
-train_dev_loader = DataLoader(dataset=train_dev_sets)
-train_dataloaders = train_dev_loader
+# train_dev_sets = torch.utils.data.ConcatDataset([train_dataloaders[0], train_dataloaders[1]])
+# train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders[2]])
+# train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders[3]])
+# train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders[4]])
+# train_dev_loader = DataLoader(dataset=train_dev_sets)
+# train_dataloaders = train_dev_loader
 
 
 logger = Logger(hparams)
