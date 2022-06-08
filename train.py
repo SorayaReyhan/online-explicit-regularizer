@@ -118,7 +118,7 @@ buffer_size=300
 train_dataloaders_0_1, train_dataloaders_0_2, train_dataloaders_0_3, train_dataloaders_0_4 =[], [], [], []
 train_dataloaders_1_2, train_dataloaders_1_3, train_dataloaders_1_4=[], [], []
 train_dataloaders_2_3, train_dataloaders_2_4=[], []
-=[]
+
 # task1 
 iterator1 = iter(train_dataloaders[0])
 for i in range(buffer_size):
