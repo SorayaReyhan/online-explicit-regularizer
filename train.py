@@ -188,17 +188,37 @@ for task in range(num_tasks):
         #train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_1)
         train_dev_sets = torch.utils.data.ConcatDataset([train_dataloaders[task], train_dataloaders_0_1])
         train_dev_loader = DataLoader(dataset=train_dev_sets)
-        print(train_dev_loader)
         train_dataloaders[task] = train_dev_loader
         # train_dataloaders[task]=torch.utils.data.DataLoader(ConcatDataset(train_dataloaders[task],train_dataloaders_0_1))
-    # elif task==2:
-    #     train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_2)
-    #     train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_2)
-    # elif task==3:
-    #     train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_3)
-    #     train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_3)
-    #     train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_2_3)
-    # elif task==4:
+    elif task==2:
+        train_dev_sets = torch.utils.data.ConcatDataset([train_dataloaders[task], train_dataloaders_0_2])
+        train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders_1_2])
+
+        train_dev_loader = DataLoader(dataset=train_dev_sets)
+        train_dataloaders[task] = train_dev_loader
+
+        # train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_2)
+        # train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_2)
+    elif task==3:
+        train_dev_sets = torch.utils.data.ConcatDataset([train_dataloaders[task], train_dataloaders_0_3])
+        train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders_1_3])
+        train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders_2_3])
+
+        train_dev_loader = DataLoader(dataset=train_dev_sets)
+        train_dataloaders[task] = train_dev_loader
+
+        # train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_3)
+        # train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_3)
+        # train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_2_3)
+    elif task==4:
+        train_dev_sets = torch.utils.data.ConcatDataset([train_dataloaders[task], train_dataloaders_0_4])
+        train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders_1_4])
+        train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders_2_4])
+        train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders_3_4])
+
+        train_dev_loader = DataLoader(dataset=train_dev_sets)
+        train_dataloaders[task] = train_dev_loader
+
     #     train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_0_4)
     #     train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_1_4)
     #     train_dataloaders[task]=train_dataloaders[task].append(train_dataloaders_2_4)
