@@ -162,7 +162,7 @@ train_dataloaders_2_3=DataLoader(dataset6 , batch_size = 32, shuffle=True)
 for i in range(int(buffer_size/4)):
     images7, labels7 = next(iter(train_dataloaders[0]))
     dataset7 = TensorDataset(images7 , labels7)
- train_dataloaders_0_4=DataLoader(dataset7 , batch_size = 32, shuffle=True)
+train_dataloaders_0_4=DataLoader(dataset7 , batch_size = 32, shuffle=True)
 
 #iterator8 = iter(train_dataloaders[1])
 for i in range(int(buffer_size/4)):
