@@ -124,8 +124,8 @@ train_dataloaders_2_3, train_dataloaders_2_4=[], []
 # task1 
 for i in range(buffer_size):
     samples1 = next(iter(train_dataloaders[0]))
-    dataset1=TensorDataset(samples1)
-    train_dataloaders_0_1.append(DataLoader(dataset1 , batch_size = 32, shuffle=True))
+    #dataset1=TensorDataset(samples1)
+    train_dataloaders_0_1.append(DataLoader(samples1 , batch_size = 32, shuffle=True))
 
 # task2 
 for i in range(int(buffer_size/2)):
