@@ -114,6 +114,7 @@ criterion = nn.CrossEntropyLoss()
 
 #%%
 # train
+buffer_size=300
 # task1 
 iterator1 = iter(train_dataloaders[0])
 for i in range(buffer_size):
