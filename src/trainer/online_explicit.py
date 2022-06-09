@@ -100,7 +100,7 @@ class OnlineExplicitTrainer:
         criterion = self.criterion
         device = self.device
         regularizer = self.regularizer
-        assert isinstance(train_dataloaders, (list, dict)), f"expect list/dict, got {type(train_dataloaders)}"
+        assert isinstance(self.train_dataloaders, (list, dict)), f"expect list/dict, got {type(self.train_dataloaders)}"
         dataloader = self.train_dataloaders[task]
 
         net.set_task(task)
