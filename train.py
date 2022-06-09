@@ -290,7 +290,7 @@ elif hparams.trainer == "ewc":
 
 elif hparams.trainer == "online_explicit_ewc":
 
-    assert isinstance(train_dataloaders, list), f"expect list, got {type(train_dataloaders)}"
+    assert isinstance(train_dataloaders, (list, dict)), f"expect list/dict, got {type(train_dataloaders)}"
     regularizer = EWC(hparams, model, criterion, DEVICE)
     ewc_trainer = OnlineExplicitTrainer(
         hparams, model, criterion, regularizer, train_dataloaders, test_dataloaders, DEVICE
