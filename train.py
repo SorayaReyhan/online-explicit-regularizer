@@ -237,6 +237,11 @@ for i in range(int(buffer_size/4)):
     # train_dataloaders_3_4.append(DataLoader(samples10 , batch_size = 32, shuffle=True, num_workers=0))
     train_dataloaders_3_4.extend(((x, y) for x, y in zip(*samples10)))
 
+print(train_dataloaders_3_4[:10])
+print(train_dataloaders_3_4[0])
+print(type(train_dataloaders_3_4[0]))
+print(type(train_dataloaders_3_4[0][0]), type(train_dataloaders_3_4[0][1]))
+
 
 train_dev_loader1, train_dev_sets1 =[], []
 train_dev_loader2, train_dev_sets2, train_dev_sets3 =[], [], []
