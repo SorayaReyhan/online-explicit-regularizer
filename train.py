@@ -181,7 +181,7 @@ for i in range(int(buffer_size/4)):
 for task in range(num_tasks):
     print(train_dataloaders[task])
     if task==1:
-        train_dev_sets = torch.utils.data.ConcatDataset([train_dataloaders[task], train_dataloaders_0_1])
+        train_dev_sets = torch.utils.data.concatenate([train_dataloaders[task], train_dataloaders_0_1])
         train_dev_loader = DataLoader(train_dev_sets.dataset)
         train_dataloaders[task]=train_dev_loader
 
