@@ -78,7 +78,7 @@ class OnlineExplicitTrainer:
         self.hparams = hparams
         self.net = net.to(device)
         self.criterion = criterion
-        assert isinstance(train_dataloaders, list), f"expect list, got {type(train_dataloaders)}"
+        assert isinstance(train_dataloaders, (list, dict)), f"expect list/dict, got {type(train_dataloaders)}"
         self.train_dataloaders = train_dataloaders
         self.test_dataloaders = test_dataloaders
         self.device = device
@@ -100,7 +100,7 @@ class OnlineExplicitTrainer:
         criterion = self.criterion
         device = self.device
         regularizer = self.regularizer
-        assert isinstance(self.train_dataloaders, list), f"expect list, got {type(self.train_dataloaders)}"
+        assert isinstance(train_dataloaders, (list, dict)), f"expect list/dict, got {type(train_dataloaders)}"
         dataloader = self.train_dataloaders[task]
 
         net.set_task(task)
