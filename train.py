@@ -238,11 +238,14 @@ for i in range(int(buffer_size/4)):
     train_dataloaders_3_4.extend(((x, y) for x, y in zip(*samples10)))
 
 print(train_dataloaders[0])
+for i,unit in enumerate(train_dataloaders[0]):
+    print(i,type(unit),len(unit))
+    print(unit)
 
-print(train_dataloaders_3_4[:10])
-print(train_dataloaders_3_4[0])
-print(type(train_dataloaders_3_4[0]))
-print(type(train_dataloaders_3_4[0][0]), type(train_dataloaders_3_4[0][1]))
+# print(train_dataloaders_3_4[:10])
+# print(train_dataloaders_3_4[0])
+# print(type(train_dataloaders_3_4[0]))
+# print(type(train_dataloaders_3_4[0][0]), type(train_dataloaders_3_4[0][1]))
 
 
 train_dev_loader1, train_dev_sets1 =[], []
