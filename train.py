@@ -132,7 +132,8 @@ for i in range(buffer_size):
         iter1=iter(train_dataloaders[0])
         samples1 = next(iter1)
     #dataset1=TensorDataset(samples1)
-    train_dataloaders_0_1.append(DataLoader(samples1 , batch_size = 32, shuffle=True, num_workers=0))
+    # train_dataloaders_0_1.append(DataLoader(samples1 , batch_size = 32, shuffle=True, num_workers=0))
+    train_dataloaders_0_1.extend(samples1)
 
 # task2
 iter2=iter(train_dataloaders[0]) 
@@ -143,7 +144,8 @@ for i in range(int(buffer_size/2)):
         iter2=iter(train_dataloaders[0])
         samples2 = next(iter2)
     #dataset2 = TensorDataset(samples2)
-    train_dataloaders_0_2.append(DataLoader(samples2 , batch_size = 32, shuffle=True, num_workers=0))
+    # train_dataloaders_0_2.append(DataLoader(samples2 , batch_size = 32, shuffle=True, num_workers=0))
+    train_dataloaders_0_2.extend(samples2)
 
 iter3=iter(train_dataloaders[1])
 for i in range(int(buffer_size/2)):
@@ -153,7 +155,8 @@ for i in range(int(buffer_size/2)):
         iter3=iter(train_dataloaders[1])
         samples3 = next(iter3)
     #dataset3 = TensorDataset(samples3)
-    train_dataloaders_1_2.append(DataLoader(samples3 , batch_size = 32, shuffle=True, num_workers=0))
+    # train_dataloaders_1_2.append(DataLoader(samples3 , batch_size = 32, shuffle=True, num_workers=0))
+    train_dataloaders_1_2.extend(samples3)
 
 # task3
 iter4=iter(train_dataloaders[0])
@@ -164,7 +167,8 @@ for i in range(int(buffer_size/3)):
         iter4=iter(train_dataloaders[0])
         samples4 = next(iter4)
     #dataset4 = TensorDataset(samples4)
-    train_dataloaders_0_3.append(DataLoader(samples4 , batch_size = 32, shuffle=True, num_workers=0))
+    # train_dataloaders_0_3.append(DataLoader(samples4 , batch_size = 32, shuffle=True, num_workers=0))
+    train_dataloaders_0_3.extend(samples4)
 
 iter5=iter(train_dataloaders[1])
 for i in range(int(buffer_size/3)):
@@ -174,7 +178,8 @@ for i in range(int(buffer_size/3)):
         iter5=iter(train_dataloaders[1])
         samples5 = next(iter5)
     #dataset5 = TensorDataset(samples5)
-    train_dataloaders_1_3.append(DataLoader(samples5 , batch_size = 32, shuffle=True, num_workers=0))
+    # train_dataloaders_1_3.append(DataLoader(samples5 , batch_size = 32, shuffle=True, num_workers=0))
+    train_dataloaders_1_3.extend(samples5)
 
 iter6=iter(train_dataloaders[2])
 for i in range(int(buffer_size/3)):
@@ -184,7 +189,8 @@ for i in range(int(buffer_size/3)):
         iter6=iter(train_dataloaders[2])
         samples6 = next(iter6)
     #dataset6 = TensorDataset(samples6)
-    train_dataloaders_2_3.append(DataLoader(samples6, batch_size = 32, shuffle=True, num_workers=0))
+    # train_dataloaders_2_3.append(DataLoader(samples6, batch_size = 32, shuffle=True, num_workers=0))
+    train_dataloaders_2_3.extend(samples6)
 
 # task4
 iter7=iter(train_dataloaders[0])
@@ -195,7 +201,8 @@ for i in range(int(buffer_size/4)):
         iter7=iter(train_dataloaders[0])
         samples7 = next(iter7)
     #dataset7 = TensorDataset(samples7)
-    train_dataloaders_0_4.append(DataLoader(samples7 , batch_size = 32, shuffle=True, num_workers=0))
+    # train_dataloaders_0_4.append(DataLoader(samples7 , batch_size = 32, shuffle=True, num_workers=0))
+    train_dataloaders_0_4.extend(samples7)
 
 iter8=iter(train_dataloaders[1])
 for i in range(int(buffer_size/4)):
@@ -205,7 +212,8 @@ for i in range(int(buffer_size/4)):
         iter8=iter(train_dataloaders[1])
         samples8 = next(iter8)
     #dataset8 = TensorDataset(samples8)
-    train_dataloaders_1_4.append(DataLoader(samples8 , batch_size = 32, shuffle=True, num_workers=0))
+    # train_dataloaders_1_4.append(DataLoader(samples8 , batch_size = 32, shuffle=True, num_workers=0))
+    train_dataloaders_1_4.extend(samples8)
 
 iter9=iter(train_dataloaders[2])
 for i in range(int(buffer_size/4)):
@@ -215,7 +223,8 @@ for i in range(int(buffer_size/4)):
         iter9=iter(train_dataloaders[2])
         samples9 = next(iter9)
     #dataset9 = TensorDataset(samples9)
-    train_dataloaders_2_4.append(DataLoader(samples9 , batch_size = 32, shuffle=True, num_workers=0))
+    # train_dataloaders_2_4.append(DataLoader(samples9 , batch_size = 32, shuffle=True, num_workers=0))
+    train_dataloaders_2_4.extend(samples9)
 
 iter10=iter(train_dataloaders[3])
 for i in range(int(buffer_size/4)):
@@ -225,43 +234,39 @@ for i in range(int(buffer_size/4)):
         iter10=iter(train_dataloaders[3])
         samples10 = next(iter10)
     #dataset10 = TensorDataset(samples10)
-    train_dataloaders_3_4.append(DataLoader(samples10 , batch_size = 32, shuffle=True, num_workers=0))
+    # train_dataloaders_3_4.append(DataLoader(samples10 , batch_size = 32, shuffle=True, num_workers=0))
+    train_dataloaders_3_4.extend(samples10)
 
 
 train_dev_loader1, train_dev_sets1 =[], []
 train_dev_loader2, train_dev_sets2, train_dev_sets3 =[], [], []
 train_dev_loader3, train_dev_sets4, train_dev_sets5, train_dev_sets6 =[], [], [], []
 train_dev_loader4, train_dev_sets7, train_dev_sets8, train_dev_sets9, train_dev_sets10 =[], [], [], [], []
+
 for task in range(num_tasks):
     print(train_dataloaders[task])
     if task==1:
-        train_dev_sets1 = torch.utils.data.ConcatDataset([train_dataloaders[task], train_dataloaders_0_1])
-        train_dev_loader1 = DataLoader(train_dev_sets1, num_workers=0)
-        train_dataloaders[task]=train_dev_loader1
+        train_dev_sets1 = torch.utils.data.ConcatDataset([*train_dataloaders[task], *train_dataloaders_0_1])
+        train_dataloaders[task] = DataLoader(train_dev_sets1, num_workers=0)
 
     elif task==2:
-        train_dev_sets2 = torch.utils.data.ConcatDataset([train_dataloaders[task], train_dataloaders_0_2])
-        train_dev_sets3 = torch.utils.data.ConcatDataset([train_dev_sets2, train_dataloaders_1_2])
-
-        train_dev_loader3 = DataLoader(train_dev_sets3, num_workers=0)
-        train_dataloaders[task] = train_dev_loader3
+        train_dev_sets2 = torch.utils.data.ConcatDataset([
+            *train_dataloaders[task], *train_dataloaders_0_2, *train_dataloaders_1_2
+        ])
+        train_dataloaders[task] = DataLoader(train_dev_sets2, num_workers=0)
 
     elif task==3:
-        train_dev_sets4 = torch.utils.data.ConcatDataset([train_dataloaders[task], train_dataloaders_0_3])
-        train_dev_sets5 = torch.utils.data.ConcatDataset([train_dev_sets4, train_dataloaders_1_3])
-        train_dev_sets6 = torch.utils.data.ConcatDataset([train_dev_sets5, train_dataloaders_2_3])
+        train_dev_sets3 = torch.utils.data.ConcatDataset([
+            *train_dataloaders[task], *train_dataloaders_0_3, *train_dataloaders_1_3, *train_dataloaders_2_3,
+        ])
 
-        train_dev_loader3 = DataLoader(train_dev_sets6, num_workers=0)
-        train_dataloaders[task] = train_dev_loader3
+        train_dataloaders[task] = DataLoader(train_dev_sets3, num_workers=0)
 
     elif task==4:
-        train_dev_sets7 = torch.utils.data.ConcatDataset([train_dataloaders[task], train_dataloaders_0_4])
-        train_dev_sets8 = torch.utils.data.ConcatDataset([train_dev_sets7, train_dataloaders_1_4])
-        train_dev_sets9 = torch.utils.data.ConcatDataset([train_dev_sets8, train_dataloaders_2_4])
-        train_dev_sets10 = torch.utils.data.ConcatDataset([train_dev_sets9, train_dataloaders_3_4])
-
-        train_dev_loader4 = DataLoader(train_dev_sets10, num_workers=0)
-        train_dataloaders[task] = train_dev_loader4
+        train_dev_sets4 = torch.utils.data.ConcatDataset([
+            *train_dataloaders[task], *train_dataloaders_0_4, *train_dataloaders_1_4, *train_dataloaders_2_4, *train_dataloaders_3_4,
+        ])
+        train_dataloaders[task] = DataLoader(train_dev_sets4, num_workers=0)
     print(train_dataloaders[task])
 # train_dev_sets = torch.utils.data.ConcatDataset([train_dataloaders[0], train_dataloaders[1]])
 # train_dev_sets = torch.utils.data.ConcatDataset([train_dev_sets, train_dataloaders[2]])
@@ -285,6 +290,7 @@ elif hparams.trainer == "ewc":
 
 elif hparams.trainer == "online_explicit_ewc":
 
+    assert isinstance(train_dataloaders, list), f"expect list, got {type(train_dataloaders)}"
     regularizer = EWC(hparams, model, criterion, DEVICE)
     ewc_trainer = OnlineExplicitTrainer(
         hparams, model, criterion, regularizer, train_dataloaders, test_dataloaders, DEVICE
