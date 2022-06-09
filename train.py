@@ -256,7 +256,7 @@ train_dev_loader4, train_dev_sets7, train_dev_sets8, train_dev_sets9, train_dev_
 for task in range(num_tasks):
     print(train_dataloaders[task])
     if task==1:
-        train_dev_sets1 = torch.utils.data.ConcatDataset([*train_dataloaders[task], *train_dataloaders_0_1])
+        train_dev_sets1 = torch.utils.data.ConcatDataset(*train_dataloaders[task], *train_dataloaders_0_1)
         train_dataloaders[task] = DataLoader(train_dev_sets1, num_workers=0)
         # train_dataloaders[task]= torch.utils.data.ConcatDataset([*train_dataloaders[task], 
         # *train_dataloaders_0_1])
