@@ -168,7 +168,7 @@ for i in range(int(buffer_size/3)):
         samples4 = next(iter4)
     #dataset4 = TensorDataset(samples4)
     # train_dataloaders_0_3.append(DataLoader(samples4 , batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_0_3.(((x, y) for x, y in zip(*samples4)))
+    train_dataloaders_0_3.extend(((x, y) for x, y in zip(*samples4)))
 
 iter5=iter(train_dataloaders[1])
 for i in range(int(buffer_size/3)):
