@@ -100,7 +100,7 @@ class OnlineExplicitTrainer:
         criterion = self.criterion
         device = self.device
         regularizer = self.regularizer
-        assert isinstance(self.train_dataloaders, (list, dict)), f"expect list/dict, got {type(self.train_dataloaders)}"
+        #assert isinstance(self.train_dataloaders, (list, dict)), f"expect list/dict, got {type(self.train_dataloaders)}"
         dataloader = self.train_dataloaders[task]
 
         net.set_task(task)
@@ -109,10 +109,10 @@ class OnlineExplicitTrainer:
         
         # i = 0...#iter / epoch
         # #iter = size(dataset) / batch_size * epoch
-        for inputs, targets in dataloader:  #  loop size(dataset) / batchsize times
+        for sample in dataloader:  #  loop size(dataset) / batchsize times
             # print("inputs", inputs)
             # print("targets",targets)
-
+            inputs, targets = sample[0], sample[1]
             inputs, targets = inputs.to(device), targets.to(device)
 
             ### SGD step on current minibatch

@@ -263,7 +263,7 @@ for i in range(int(buffer_size/4)):
 #-----------------------------------------------------------------------------------
 list_sample_task =[]
 
-def get_sample(task_number,buffer_size):
+def get_sample(task_number):
     data_loader_pointer=iter(train_dataloaders[task_number])
     result =[]
     while True:
@@ -277,7 +277,7 @@ def get_sample(task_number,buffer_size):
     return result
 
 for task in range(2):
-    list_sample_task.append(get_sample(task,10))
+    list_sample_task.append(get_sample(task))
 
 
 train_dev_loader1, train_dev_sets1 =[], []
@@ -285,7 +285,7 @@ train_dev_loader2, train_dev_sets2, train_dev_sets3 =[], [], []
 train_dev_loader3, train_dev_sets4, train_dev_sets5, train_dev_sets6 =[], [], [], []
 train_dev_loader4, train_dev_sets7, train_dev_sets8, train_dev_sets9, train_dev_sets10 =[], [], [], [], []
 
-train_dataloaders_final = [train_dataloaders[0]]
+train_dataloaders_final = [list_sample_task[0]]
 for task in range(num_tasks):
     new_dataset=[]
     if task==1:
@@ -296,8 +296,9 @@ for task in range(num_tasks):
         # train_dataloaders[task]= torch.utils.data.ConcatDataset([*train_dataloaders[task], 
         # *train_dataloaders_0_1])
         task0_sample = list_sample_task[0]
-        final_list_sample= task0_sample[:300] + list_sample_task
-        train_dataloaders_final.append(DataLoader(final_list_sample, num_workers=0))
+        final_list_sample= task0_sample[:300] + list_sample_task[task]
+        train_dataloaders_final.append(final_list_sample)
+        print("print dataloader final",train_dataloaders_final)
 
     # elif task==2:
     #     train_dev_sets2 = torch.utils.data.ConcatDataset([
