@@ -156,7 +156,7 @@ if hparams.trainer == "sgd":
 
 elif hparams.trainer == "ewc":
 
-    ewc_trainer = EWCTrainer(hparams, model, criterion, train_dataloaders, test_dataloaders, DEVICE)
+    ewc_trainer = EWCTrainer(hparams, model, criterion, train_dataloaders_final, test_dataloaders, DEVICE)
     loss_ewc, acc_ewc = ewc_trainer.run()
     logger.log_experiment_results(loss_ewc, acc_ewc, name="ewc")
 
