@@ -132,6 +132,7 @@ iter1=iter(train_dataloaders[0])
 for i in range(buffer_size):
     try:
         samples1 = next(iter1)
+        print("samples1: input & target",samples1)
     except StopIteration:
         iter1=iter(train_dataloaders[0])
         samples1 = next(iter1)
