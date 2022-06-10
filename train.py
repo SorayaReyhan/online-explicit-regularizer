@@ -124,16 +124,23 @@ train_dataloaders_3_4=[]
 
 
 # task1 
-iter1=iter(train_dataloaders[0])
+# iter1=iter(train_dataloaders[0])
+# for i in range(buffer_size):
+#     try:
+#         samples1 = next(iter1)
+#     except StopIteration:
+#         iter1=iter(train_dataloaders[0])
+#         samples1 = next(iter1)
+#     #dataset1=TensorDataset(samples1)
+#     # train_dataloaders_0_1.append(DataLoader(samples1 , batch_size = 32, shuffle=True, num_workers=0))
+#     train_dataloaders_0_1.extend(((x, y) for x, y in zip(*samples1)))
+
 for i in range(buffer_size):
-    try:
-        samples1 = next(iter1)
-    except StopIteration:
-        iter1=iter(train_dataloaders[0])
-        samples1 = next(iter1)
-    #dataset1=TensorDataset(samples1)
-    # train_dataloaders_0_1.append(DataLoader(samples1 , batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_0_1.extend(((x, y) for x, y in zip(*samples1)))
+    for images, labels in train_dataloaders[0]:  
+        image = images[i]    
+        label = labels[i]
+        train_dataloaders_0_1.extend(image, label)
+
 
 # task2
 iter2=iter(train_dataloaders[0]) 
