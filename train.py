@@ -151,7 +151,7 @@ for task in range(1,num_tasks):
 logger = Logger(hparams)
 
 if hparams.trainer == "sgd":
-    loss, acc = standard_process(hparams, model, criterion, train_dataloaders, test_dataloaders, DEVICE)
+    loss, acc = standard_process(hparams, model, criterion, train_dataloaders_final, test_dataloaders, DEVICE)
     logger.log_experiment_results(loss, acc, name="sgd")
 
 elif hparams.trainer == "ewc":
