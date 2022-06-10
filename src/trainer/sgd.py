@@ -13,7 +13,7 @@ def normal_train(
     net.train()
     epoch_loss = 0
     for sample in dataloader:
-        inputs, target = sample[0], sample[1]
+        inputs, targets = sample[0], sample[1]
         inputs, targets = inputs.to(device), targets.to(device)
         optimizer.zero_grad()
         output = net(inputs)
