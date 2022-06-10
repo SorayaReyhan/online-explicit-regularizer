@@ -110,8 +110,8 @@ class OnlineExplicitTrainer:
         # i = 0...#iter / epoch
         # #iter = size(dataset) / batch_size * epoch
         for inputs, targets in dataloader:  #  loop size(dataset) / batchsize times
-            print("inputs", inputs)
-            print("targets",targets)
+            # print("inputs", inputs)
+            # print("targets",targets)
 
             inputs, targets = inputs.to(device), targets.to(device)
 
