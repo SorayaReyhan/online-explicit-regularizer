@@ -106,10 +106,13 @@ class OnlineExplicitTrainer:
         net.set_task(task)
         net.train()
         epoch_loss = 0
-
+        
         # i = 0...#iter / epoch
         # #iter = size(dataset) / batch_size * epoch
         for inputs, targets in dataloader:  #  loop size(dataset) / batchsize times
+            print("inputs", inputs)
+            print("targets",targets)
+
             inputs, targets = inputs.to(device), targets.to(device)
 
             ### SGD step on current minibatch
