@@ -41,7 +41,7 @@ class HParams(EWCTrainerHParams, MnistMLPHParams, OnlineExplicitTrainerHParams):
     dropout: float = 0.0
     name: str = "exp"  # experiment name to append to folder name
     singlehead:bool = False
-    buffer_size: int = 900
+    buffer_size: int = 600
 
 
 
