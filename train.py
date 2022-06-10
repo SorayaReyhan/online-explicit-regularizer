@@ -118,147 +118,147 @@ criterion = nn.CrossEntropyLoss()
 # train
 num_tasks=5
 buffer_size=10
-train_dataloaders_0_1=[]
-train_dataloaders_0_2, train_dataloaders_0_3, train_dataloaders_0_4 =[], [], []
-train_dataloaders_1_2, train_dataloaders_1_3, train_dataloaders_1_4=[], [], []
-train_dataloaders_2_3, train_dataloaders_2_4=[], []
-train_dataloaders_3_4=[]
+# train_dataloaders_0_1=[]
+# train_dataloaders_0_2, train_dataloaders_0_3, train_dataloaders_0_4 =[], [], []
+# train_dataloaders_1_2, train_dataloaders_1_3, train_dataloaders_1_4=[], [], []
+# train_dataloaders_2_3, train_dataloaders_2_4=[], []
+# train_dataloaders_3_4=[]
 
 # empty_dataset=IterableDataset()
 # train_dataloaders_0_1=DataLoader(empty_dataset, batch_size=batch_size)
 
 #task1 
-iter1=iter(train_dataloaders[0])
-for i in range(buffer_size):
-    try:
-        samples1 = next(iter1)
-        print("samples1: input & target",samples1)
-    except StopIteration:
-        iter1=iter(train_dataloaders[0])
-        samples1 = next(iter1)
-    #dataset1=TensorDataset(samples1)
-    # train_dataloaders_0_1.append(DataLoader(samples1 , batch_size = 32, shuffle=True, num_workers=0))
-    #train_dataloaders_0_1.extend(((x, y) for x, y in zip(*samples1)))
-    train_dataloaders_0_1.append(samples1)
-
+# iter1=iter(train_dataloaders[0])
 # for i in range(buffer_size):
-#     for images, labels in train_dataloaders[0]:  
-#         image = images[i]    
-#         label = labels[i]
-#         train_dataloaders_0_1.append(image, label)
+#     try:
+#         samples1 = next(iter1)
+#         print("samples1: input & target",samples1)
+#     except StopIteration:
+#         iter1=iter(train_dataloaders[0])
+#         samples1 = next(iter1)
+#     #dataset1=TensorDataset(samples1)
+#     # train_dataloaders_0_1.append(DataLoader(samples1 , batch_size = 32, shuffle=True, num_workers=0))
+#     #train_dataloaders_0_1.extend(((x, y) for x, y in zip(*samples1)))
+#     train_dataloaders_0_1.append(samples1)
+
+# # for i in range(buffer_size):
+# #     for images, labels in train_dataloaders[0]:  
+# #         image = images[i]    
+# #         label = labels[i]
+# #         train_dataloaders_0_1.append(image, label)
 
 
-# task2
-iter2=iter(train_dataloaders[0]) 
-for i in range(int(buffer_size/2)):
-    try:
-        samples2 = next(iter2)
-    except StopIteration:
-        iter2=iter(train_dataloaders[0])
-        samples2 = next(iter2)
-    #dataset2 = TensorDataset(samples2)
-    # train_dataloaders_0_2.append(DataLoader(samples2 , batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_0_2.extend(((x, y) for x, y in zip(*samples2)))
+# # task2
+# iter2=iter(train_dataloaders[0]) 
+# for i in range(int(buffer_size/2)):
+#     try:
+#         samples2 = next(iter2)
+#     except StopIteration:
+#         iter2=iter(train_dataloaders[0])
+#         samples2 = next(iter2)
+#     #dataset2 = TensorDataset(samples2)
+#     # train_dataloaders_0_2.append(DataLoader(samples2 , batch_size = 32, shuffle=True, num_workers=0))
+#     train_dataloaders_0_2.extend(((x, y) for x, y in zip(*samples2)))
 
-iter3=iter(train_dataloaders[1])
-for i in range(int(buffer_size/2)):
-    try:
-        samples3 = next(iter3)
-    except StopIteration:
-        iter3=iter(train_dataloaders[1])
-        samples3 = next(iter3)
-    #dataset3 = TensorDataset(samples3)
-    # train_dataloaders_1_2.append(DataLoader(samples3 , batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_1_2.extend(((x, y) for x, y in zip(*samples3)))
+# iter3=iter(train_dataloaders[1])
+# for i in range(int(buffer_size/2)):
+#     try:
+#         samples3 = next(iter3)
+#     except StopIteration:
+#         iter3=iter(train_dataloaders[1])
+#         samples3 = next(iter3)
+#     #dataset3 = TensorDataset(samples3)
+#     # train_dataloaders_1_2.append(DataLoader(samples3 , batch_size = 32, shuffle=True, num_workers=0))
+#     train_dataloaders_1_2.extend(((x, y) for x, y in zip(*samples3)))
 
-# task3
-iter4=iter(train_dataloaders[0])
-for i in range(int(buffer_size/3)):
-    try:
-        samples4 = next(iter4)
-    except StopIteration:
-        iter4=iter(train_dataloaders[0])
-        samples4 = next(iter4)
-    #dataset4 = TensorDataset(samples4)
-    # train_dataloaders_0_3.append(DataLoader(samples4 , batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_0_3.extend(((x, y) for x, y in zip(*samples4)))
+# # task3
+# iter4=iter(train_dataloaders[0])
+# for i in range(int(buffer_size/3)):
+#     try:
+#         samples4 = next(iter4)
+#     except StopIteration:
+#         iter4=iter(train_dataloaders[0])
+#         samples4 = next(iter4)
+#     #dataset4 = TensorDataset(samples4)
+#     # train_dataloaders_0_3.append(DataLoader(samples4 , batch_size = 32, shuffle=True, num_workers=0))
+#     train_dataloaders_0_3.extend(((x, y) for x, y in zip(*samples4)))
 
-iter5=iter(train_dataloaders[1])
-for i in range(int(buffer_size/3)):
-    try:
-        samples5 = next(iter5)
-    except StopIteration:
-        iter5=iter(train_dataloaders[1])
-        samples5 = next(iter5)
-    #dataset5 = TensorDataset(samples5)
-    # train_dataloaders_1_3.append(DataLoader(samples5 , batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_1_3.extend(((x, y) for x, y in zip(*samples5)))
+# iter5=iter(train_dataloaders[1])
+# for i in range(int(buffer_size/3)):
+#     try:
+#         samples5 = next(iter5)
+#     except StopIteration:
+#         iter5=iter(train_dataloaders[1])
+#         samples5 = next(iter5)
+#     #dataset5 = TensorDataset(samples5)
+#     # train_dataloaders_1_3.append(DataLoader(samples5 , batch_size = 32, shuffle=True, num_workers=0))
+#     train_dataloaders_1_3.extend(((x, y) for x, y in zip(*samples5)))
 
-iter6=iter(train_dataloaders[2])
-for i in range(int(buffer_size/3)):
-    try:
-        samples6 = next(iter6)
-    except StopIteration:
-        iter6=iter(train_dataloaders[2])
-        samples6 = next(iter6)
-    #dataset6 = TensorDataset(samples6)
-    # train_dataloaders_2_3.append(DataLoader(samples6, batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_2_3.extend(((x, y) for x, y in zip(*samples6)))
+# iter6=iter(train_dataloaders[2])
+# for i in range(int(buffer_size/3)):
+#     try:
+#         samples6 = next(iter6)
+#     except StopIteration:
+#         iter6=iter(train_dataloaders[2])
+#         samples6 = next(iter6)
+#     #dataset6 = TensorDataset(samples6)
+#     # train_dataloaders_2_3.append(DataLoader(samples6, batch_size = 32, shuffle=True, num_workers=0))
+#     train_dataloaders_2_3.extend(((x, y) for x, y in zip(*samples6)))
 
-# task4
-iter7=iter(train_dataloaders[0])
-for i in range(int(buffer_size/4)):
-    try:
-        samples7 = next(iter7)
-    except StopIteration:
-        iter7=iter(train_dataloaders[0])
-        samples7 = next(iter7)
-    #dataset7 = TensorDataset(samples7)
-    # train_dataloaders_0_4.append(DataLoader(samples7 , batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_0_4.extend(((x, y) for x, y in zip(*samples7)))
+# # task4
+# iter7=iter(train_dataloaders[0])
+# for i in range(int(buffer_size/4)):
+#     try:
+#         samples7 = next(iter7)
+#     except StopIteration:
+#         iter7=iter(train_dataloaders[0])
+#         samples7 = next(iter7)
+#     #dataset7 = TensorDataset(samples7)
+#     # train_dataloaders_0_4.append(DataLoader(samples7 , batch_size = 32, shuffle=True, num_workers=0))
+#     train_dataloaders_0_4.extend(((x, y) for x, y in zip(*samples7)))
 
-iter8=iter(train_dataloaders[1])
-for i in range(int(buffer_size/4)):
-    try:
-        samples8 = next(iter8)
-    except StopIteration:
-        iter8=iter(train_dataloaders[1])
-        samples8 = next(iter8)
-    #dataset8 = TensorDataset(samples8)
-    # train_dataloaders_1_4.append(DataLoader(samples8 , batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_1_4.extend(((x, y) for x, y in zip(*samples8)))
+# iter8=iter(train_dataloaders[1])
+# for i in range(int(buffer_size/4)):
+#     try:
+#         samples8 = next(iter8)
+#     except StopIteration:
+#         iter8=iter(train_dataloaders[1])
+#         samples8 = next(iter8)
+#     #dataset8 = TensorDataset(samples8)
+#     # train_dataloaders_1_4.append(DataLoader(samples8 , batch_size = 32, shuffle=True, num_workers=0))
+#     train_dataloaders_1_4.extend(((x, y) for x, y in zip(*samples8)))
 
-iter9=iter(train_dataloaders[2])
-for i in range(int(buffer_size/4)):
-    try:
-        samples9 = next(iter9)
-    except StopIteration:
-        iter9=iter(train_dataloaders[2])
-        samples9 = next(iter9)
-    #dataset9 = TensorDataset(samples9)
-    # train_dataloaders_2_4.append(DataLoader(samples9 , batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_2_4.extend(((x, y) for x, y in zip(*samples9)))
+# iter9=iter(train_dataloaders[2])
+# for i in range(int(buffer_size/4)):
+#     try:
+#         samples9 = next(iter9)
+#     except StopIteration:
+#         iter9=iter(train_dataloaders[2])
+#         samples9 = next(iter9)
+#     #dataset9 = TensorDataset(samples9)
+#     # train_dataloaders_2_4.append(DataLoader(samples9 , batch_size = 32, shuffle=True, num_workers=0))
+#     train_dataloaders_2_4.extend(((x, y) for x, y in zip(*samples9)))
 
-iter10=iter(train_dataloaders[3])
-for i in range(int(buffer_size/4)):
-    try:
-        samples10 = next(iter10)
-    except StopIteration:
-        iter10=iter(train_dataloaders[3])
-        samples10 = next(iter10)
-    #dataset10 = TensorDataset(samples10)
-    # train_dataloaders_3_4.append(DataLoader(samples10 , batch_size = 32, shuffle=True, num_workers=0))
-    train_dataloaders_3_4.extend(((x, y) for x, y in zip(*samples10)))
+# iter10=iter(train_dataloaders[3])
+# for i in range(int(buffer_size/4)):
+#     try:
+#         samples10 = next(iter10)
+#     except StopIteration:
+#         iter10=iter(train_dataloaders[3])
+#         samples10 = next(iter10)
+#     #dataset10 = TensorDataset(samples10)
+#     # train_dataloaders_3_4.append(DataLoader(samples10 , batch_size = 32, shuffle=True, num_workers=0))
+#     train_dataloaders_3_4.extend(((x, y) for x, y in zip(*samples10)))
 
-# print(train_dataloaders[0])
-# for i,unit in enumerate(train_dataloaders[0]):
-#     print(i,type(unit),len(unit))
-#     print(unit)
+# # print(train_dataloaders[0])
+# # for i,unit in enumerate(train_dataloaders[0]):
+# #     print(i,type(unit),len(unit))
+# #     print(unit)
 
-# print(train_dataloaders_3_4[:10])
-# print(train_dataloaders_3_4[0])
-# print(type(train_dataloaders_3_4[0]))
-# print(type(train_dataloaders_3_4[0][0]), type(train_dataloaders_3_4[0][1]))
+# # print(train_dataloaders_3_4[:10])
+# # print(train_dataloaders_3_4[0])
+# # print(type(train_dataloaders_3_4[0]))
+# # print(type(train_dataloaders_3_4[0][0]), type(train_dataloaders_3_4[0][1]))
 
 #-----------------------------------------------------------------------------------
 list_sample_task =[]
@@ -276,29 +276,36 @@ def get_sample(task_number):
         result.append(data)
     return result
 
-for task in range(2):
+for task in range(num_tasks):
     list_sample_task.append(get_sample(task))
 
 
-train_dev_loader1, train_dev_sets1 =[], []
-train_dev_loader2, train_dev_sets2, train_dev_sets3 =[], [], []
-train_dev_loader3, train_dev_sets4, train_dev_sets5, train_dev_sets6 =[], [], [], []
-train_dev_loader4, train_dev_sets7, train_dev_sets8, train_dev_sets9, train_dev_sets10 =[], [], [], [], []
-
+# train_dev_loader1, train_dev_sets1 =[], []
+# train_dev_loader2, train_dev_sets2, train_dev_sets3 =[], [], []
+# train_dev_loader3, train_dev_sets4, train_dev_sets5, train_dev_sets6 =[], [], [], []
+# train_dev_loader4, train_dev_sets7, train_dev_sets8, train_dev_sets9, train_dev_sets10 =[], [], [], [], []
+K = 300
 train_dataloaders_final = [list_sample_task[0]]
-for task in range(num_tasks):
+for task in range(1,num_tasks):
     new_dataset=[]
-    if task==1:
-        #train_dev_sets1 = torch.utils.data.ConcatDataset([*train_dataloaders[task], *train_dataloaders_0_1])
-        #train_dev_sets1= train_dataloaders[task].extend(train_dataloaders_0_1)
-        #train_dataloaders[task] = DataLoader(train_dev_sets1, num_workers=0)
+    current_sample_set =list_sample_task[task]
+    for i in range(task):
+        new_dataset += list_sample_task[i][:(K//task)]
+    new_dataset.extend(current_sample_set)
+    train_dataloaders_final.append(new_dataset)
 
-        # train_dataloaders[task]= torch.utils.data.ConcatDataset([*train_dataloaders[task], 
-        # *train_dataloaders_0_1])
-        task0_sample = list_sample_task[0]
-        final_list_sample= task0_sample[:300] + list_sample_task[task]
-        train_dataloaders_final.append(final_list_sample)
-        print("print dataloader final",train_dataloaders_final)
+
+    # if task==1:
+    #     #train_dev_sets1 = torch.utils.data.ConcatDataset([*train_dataloaders[task], *train_dataloaders_0_1])
+    #     #train_dev_sets1= train_dataloaders[task].extend(train_dataloaders_0_1)
+    #     #train_dataloaders[task] = DataLoader(train_dev_sets1, num_workers=0)
+
+    #     # train_dataloaders[task]= torch.utils.data.ConcatDataset([*train_dataloaders[task], 
+    #     # *train_dataloaders_0_1])
+    #     task0_sample = list_sample_task[0]
+    #     final_list_sample= task0_sample[:300] + list_sample_task[task]
+    #     train_dataloaders_final.append(final_list_sample)
+    #     print("print dataloader final",train_dataloaders_final)
 
     # elif task==2:
     #     train_dev_sets2 = torch.utils.data.ConcatDataset([
