@@ -24,6 +24,7 @@ from src.utils import Logger, seed_everything
 from torch.utils.data import DataLoader , TensorDataset, ConcatDataset
 
 
+
 @dataclass
 class HParams(EWCTrainerHParams, MnistMLPHParams, OnlineExplicitTrainerHParams):
     epochs: int = 50
@@ -117,32 +118,33 @@ criterion = nn.CrossEntropyLoss()
 # train
 num_tasks=5
 buffer_size=10
-#train_dataloaders_0_1, 
+train_dataloaders_0_1=[]
 train_dataloaders_0_2, train_dataloaders_0_3, train_dataloaders_0_4 =[], [], []
 train_dataloaders_1_2, train_dataloaders_1_3, train_dataloaders_1_4=[], [], []
 train_dataloaders_2_3, train_dataloaders_2_4=[], []
 train_dataloaders_3_4=[]
 
-empty_dataset=IterableDataset()
-train_dataloaders_0_1=DataLoader(empty_dataset, batch_size=batch_size)
+# empty_dataset=IterableDataset()
+# train_dataloaders_0_1=DataLoader(empty_dataset, batch_size=batch_size)
 
-# task1 
-# iter1=iter(train_dataloaders[0])
-# for i in range(buffer_size):
-#     try:
-#         samples1 = next(iter1)
-#     except StopIteration:
-#         iter1=iter(train_dataloaders[0])
-#         samples1 = next(iter1)
-#     #dataset1=TensorDataset(samples1)
-#     # train_dataloaders_0_1.append(DataLoader(samples1 , batch_size = 32, shuffle=True, num_workers=0))
-#     train_dataloaders_0_1.extend(((x, y) for x, y in zip(*samples1)))
-
+task1 
+iter1=iter(train_dataloaders[0])
 for i in range(buffer_size):
-    for images, labels in train_dataloaders[0]:  
-        image = images[i]    
-        label = labels[i]
-        train_dataloaders_0_1.append(image, label)
+    try:
+        samples1 = next(iter1)
+    except StopIteration:
+        iter1=iter(train_dataloaders[0])
+        samples1 = next(iter1)
+    #dataset1=TensorDataset(samples1)
+    # train_dataloaders_0_1.append(DataLoader(samples1 , batch_size = 32, shuffle=True, num_workers=0))
+    #train_dataloaders_0_1.extend(((x, y) for x, y in zip(*samples1)))
+    train_dataloaders_0_1.append(samples1)
+
+# for i in range(buffer_size):
+#     for images, labels in train_dataloaders[0]:  
+#         image = images[i]    
+#         label = labels[i]
+#         train_dataloaders_0_1.append(image, label)
 
 
 # task2
