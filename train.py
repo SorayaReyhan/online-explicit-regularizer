@@ -117,11 +117,14 @@ criterion = nn.CrossEntropyLoss()
 # train
 num_tasks=5
 buffer_size=10
-train_dataloaders_0_1, train_dataloaders_0_2, train_dataloaders_0_3, train_dataloaders_0_4 =[], [], [], []
+#train_dataloaders_0_1, 
+train_dataloaders_0_2, train_dataloaders_0_3, train_dataloaders_0_4 =[], [], [], []
 train_dataloaders_1_2, train_dataloaders_1_3, train_dataloaders_1_4=[], [], []
 train_dataloaders_2_3, train_dataloaders_2_4=[], []
 train_dataloaders_3_4=[]
 
+empty_dataset=IterableDataset()
+train_dataloaders_0_1=DataLoader(empty_dataset, batch_size=batch_size)
 
 # task1 
 # iter1=iter(train_dataloaders[0])
@@ -139,7 +142,7 @@ for i in range(buffer_size):
     for images, labels in train_dataloaders[0]:  
         image = images[i]    
         label = labels[i]
-        train_dataloaders_0_1.extend(image, label)
+        train_dataloaders_0_1.append(image, label)
 
 
 # task2
