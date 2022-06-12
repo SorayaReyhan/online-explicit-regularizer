@@ -136,7 +136,7 @@ for task in range(num_tasks):
     list_sample_task.append(get_sample(task))
 
 
-K = 600
+K = 900
 train_dataloaders_final = [list_sample_task[0]]
 for task in range(1,num_tasks):
     new_dataset=[]
