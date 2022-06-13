@@ -116,7 +116,7 @@ criterion = nn.CrossEntropyLoss()
 
 #%%
 # train
-num_tasks=4
+num_tasks=5
 list_sample_task =[]
 
 def get_sample(task_number):
