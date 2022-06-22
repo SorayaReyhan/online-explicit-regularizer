@@ -115,8 +115,9 @@ elif hparams.model == "vanilla_cifar":
 criterion = nn.CrossEntropyLoss()
 
 #%%
-# train
-num_tasks=5
+# applying rehearsal: set the num_tasks 
+
+num_tasks = num_tasks
 list_sample_task =[]
 
 def get_sample(task_number):
@@ -135,7 +136,7 @@ def get_sample(task_number):
 for task in range(num_tasks):
     list_sample_task.append(get_sample(task))
 
-
+# set the K (number of samples from previous tasks) for applying rehearsal 
 K = 300
 train_dataloaders_final = [list_sample_task[0]]
 for task in range(1,num_tasks):
@@ -151,12 +152,13 @@ for task in range(1,num_tasks):
 logger = Logger(hparams)
 
 if hparams.trainer == "sgd":
-    loss, acc = standard_process(hparams, model, criterion, train_dataloaders_final, test_dataloaders, DEVICE)
+    # for applying rehearsal along with sgd we need to change train_loaders to train_dataloasers_final
+    loss, acc = standard_process(hparams, model, criterion, train_dataloaders, test_dataloaders, DEVICE)
     logger.log_experiment_results(loss, acc, name="sgd")
 
 elif hparams.trainer == "ewc":
-
-    ewc_trainer = EWCTrainer(hparams, model, criterion, train_dataloaders_final, test_dataloaders, DEVICE)
+     # for applying rehearsal along with ewc we need to change train_loaders to train_dataloasers_final
+    ewc_trainer = EWCTrainer(hparams, model, criterion, train_dataloaders, test_dataloaders, DEVICE)
     loss_ewc, acc_ewc = ewc_trainer.run()
     logger.log_experiment_results(loss_ewc, acc_ewc, name="ewc")
 
@@ -165,7 +167,8 @@ elif hparams.trainer == "online_explicit_ewc":
     assert isinstance(train_dataloaders, (list, dict)), f"expect list/dict, got {type(train_dataloaders)}"
     regularizer = EWC(hparams, model, criterion, DEVICE)
     ewc_trainer = OnlineExplicitTrainer(
-        hparams, model, criterion, regularizer, train_dataloaders_final, test_dataloaders, DEVICE
+        # for applying rehearsal along with explicit ewc, we need to change train_loaders to train_dataloasers_final
+        hparams, model, criterion, regularizer, train_dataloaders, test_dataloaders, DEVICE
     )
     loss_explicit_ewc, acc_explicit_ewc= ewc_trainer.run()
     logger.log_experiment_results(loss_explicit_ewc, acc_explicit_ewc, name="explicit ewc")

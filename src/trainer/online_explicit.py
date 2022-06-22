@@ -56,9 +56,9 @@ def explicit_step(
             alp_prev = prev_imp[name] ** (1 / 2)  # alpha previous
             alp = alp_new / (alp_new + alp_prev + 1e-20)  # R_j
             param.data = alp * param.data + (1 - alp) * prev_param.data  # interpolation
-
-            #param_data_list.append(torch.mean(param.data))
-            #alp_list.append(torch.mean(alp))
+            # calculating average R and average interpolation:
+            param_data_list.append(torch.mean(param.data))
+            alp_list.append(torch.mean(alp))
             
             
 class OnlineExplicitTrainer:
@@ -172,14 +172,14 @@ class OnlineExplicitTrainer:
                 testloader = self.test_dataloaders[sub_task]
                 test_acc = test_model(net, testloader, self.device)
                 acc[sub_task].append(test_acc)
+        # calculating average R and average interpolation:
+        if len(alp_list) > 0:
+            alp_mean_by_task = torch.mean(torch.stack(alp_list), dim=0)
+            print(alp_mean_by_task)
         
-        # if len(alp_list) > 0:
-        #     alp_mean_by_task = torch.mean(torch.stack(alp_list), dim=0)
-        #     print(alp_mean_by_task)
-        
-        # if len(param_data_list) > 0:
-        #     param_data_mean_by_task = torch.mean(torch.stack(param_data_list), dim=0)
-        #     print(param_data_mean_by_task)
+        if len(param_data_list) > 0:
+            param_data_mean_by_task = torch.mean(torch.stack(param_data_list), dim=0)
+            print(param_data_mean_by_task)
 
     def run(self):
         """Run continual learning. Train on tasks sequentially.
