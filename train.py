@@ -59,7 +59,6 @@ parser.add_argument("--batch_size", type=int, default=HParams.batch_size)
 parser.add_argument("--seed", type=int, default=HParams.seed)
 parser.add_argument("--importance", type=float, default=HParams.importance)
 parser.add_argument("--saliency_momentum", type=float, default=HParams.saliency_momentum)
-#parser.add_argument("--singlehead", action="store_true")
 parser.add_argument("--singlehead", type=bool)
 parser.add_argument("--buffer_size", type=int, default=HParams.buffer_size)
 
@@ -115,8 +114,8 @@ elif hparams.model == "vanilla_cifar":
 criterion = nn.CrossEntropyLoss()
 
 #%%
-# applying rehearsal: set the num_tasks 
-
+# for applying rehearsal: I change the content of train_dataloaders for each tasks as follow 
+# I named it train_dataloaders_final 
 num_tasks = num_tasks
 list_sample_task =[]
 
@@ -148,7 +147,7 @@ for task in range(1,num_tasks):
     train_dataloaders_final.append(new_dataset)
 
 
-
+# determining the trainer
 logger = Logger(hparams)
 
 if hparams.trainer == "sgd":
